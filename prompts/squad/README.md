@@ -94,7 +94,7 @@ The staff directory is now accessed via RAG-based lookup tool:
 ## File Structure
 
 ```
-squad_prompts_v3/
+prompts/squad/
 ├── README.md                    # This file
 ├── assistants/                  # System prompts (copy to VAPI)
 │   ├── 01_greeter_classifier.md

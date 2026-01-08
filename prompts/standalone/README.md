@@ -111,7 +111,7 @@ See `pre_identified_caller/backend_variables.md` for the exact variable structur
 ### Files
 
 ```
-standalone_assistants/
+prompts/standalone/
 ├── README.md                           # This file
 └── pre_identified_caller/
     ├── system_prompt.md                # Full system prompt + VAPI config

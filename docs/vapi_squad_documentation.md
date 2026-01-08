@@ -491,43 +491,5 @@ POST to `/call/phone` with additional fields:
 
 ---
 
-## Application to Personal Injury Law Firm Receptionist
-
-For the AI receptionist project, consider this squad structure:
-
-### Recommended Assistants
-
-1. **Intake Assistant** (Entry Point)
-   - Warm greeting, collect caller name
-   - Determine if new client inquiry, existing client, or other
-   - Route appropriately
-
-2. **Case Qualification Assistant**
-   - Collect incident details
-   - Determine case type (auto accident, slip & fall, etc.)
-   - Assess urgency and severity
-   - Gather basic qualification info
-
-3. **Appointment Scheduler Assistant**
-   - Book consultations
-   - Provide preparation info
-   - Handle rescheduling
-
-4. **Emergency/Urgent Assistant**
-   - Handle time-sensitive situations
-   - Direct to appropriate resources
-   - Escalate to live staff when needed
-
-### Tone Alignment (Atlanta Georgia Callers)
-
-All assistants should maintain:
-- Warm, grounded, steady voice
-- Slightly informal but professional
-- Clear pacing with reassurance
-- Like a trusted neighbor helping after a bad day
-- Empathetic acknowledgment of their situation
-
----
-
 *Document created: 2025-12-19*
 *Source: VAPI Documentation (docs.vapi.ai)*
