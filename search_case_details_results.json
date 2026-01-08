@@ -1,0 +1,497 @@
+[
+  {
+    "call_id": "019b8062-3f97-7223-a794-940ed3607f5d",
+    "customer_phone": "+16784963387",
+    "call_date": "2026-01-02T20:24:41.111Z",
+    "client_name": "Ebenezer Grace",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b8062-3f97-7223-a794-940ed3607f5d",
+    "customer_phone": "+16784963387",
+    "call_date": "2026-01-02T20:24:41.111Z",
+    "client_name": "Ebenezer Graves",
+    "count": 1,
+    "success": true,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b8062-3f97-7223-a794-940ed3607f5d",
+    "customer_phone": "+16784963387",
+    "call_date": "2026-01-02T20:24:41.111Z",
+    "client_name": "Johnell Walker",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b8062-3f97-7223-a794-940ed3607f5d",
+    "customer_phone": "+16784963387",
+    "call_date": "2026-01-02T20:24:41.111Z",
+    "client_name": "Johnell Walker",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b8022-72fc-755e-8679-4dc68a944965",
+    "customer_phone": "+16784963387",
+    "call_date": "2026-01-02T19:14:59.964Z",
+    "client_name": "Aaron Stewart",
+    "count": 1,
+    "success": true,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b8022-72fc-755e-8679-4dc68a944965",
+    "customer_phone": "+16784963387",
+    "call_date": "2026-01-02T19:14:59.964Z",
+    "client_name": "Jerome Davis",
+    "count": 1,
+    "success": true,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b8022-72fc-755e-8679-4dc68a944965",
+    "customer_phone": "+16784963387",
+    "call_date": "2026-01-02T19:14:59.964Z",
+    "client_name": "Florence Mamba",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b8022-72fc-755e-8679-4dc68a944965",
+    "customer_phone": "+16784963387",
+    "call_date": "2026-01-02T19:14:59.964Z",
+    "client_name": "Plaments Mamba",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b8022-72fc-755e-8679-4dc68a944965",
+    "customer_phone": "+16784963387",
+    "call_date": "2026-01-02T19:14:59.964Z",
+    "client_name": "Charlie Mamba",
+    "count": 1,
+    "success": true,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b8022-72fc-755e-8679-4dc68a944965",
+    "customer_phone": "+16784963387",
+    "call_date": "2026-01-02T19:14:59.964Z",
+    "client_name": "Selena Dieguez",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b8022-72fc-755e-8679-4dc68a944965",
+    "customer_phone": "+16784963387",
+    "call_date": "2026-01-02T19:14:59.964Z",
+    "client_name": "Selena Dieguez",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b8022-72fc-755e-8679-4dc68a944965",
+    "customer_phone": "+16784963387",
+    "call_date": "2026-01-02T19:14:59.964Z",
+    "client_name": "Selena Sabino",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b8022-72fc-755e-8679-4dc68a944965",
+    "customer_phone": "+16784963387",
+    "call_date": "2026-01-02T19:14:59.964Z",
+    "client_name": "Selena Sabino",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b8022-72fc-755e-8679-4dc68a944965",
+    "customer_phone": "+16784963387",
+    "call_date": "2026-01-02T19:14:59.964Z",
+    "client_name": "Janelle Walker",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b8022-72fc-755e-8679-4dc68a944965",
+    "customer_phone": "+16784963387",
+    "call_date": "2026-01-02T19:14:59.964Z",
+    "client_name": "Janelle Walker",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b8022-72fc-755e-8679-4dc68a944965",
+    "customer_phone": "+16784963387",
+    "call_date": "2026-01-02T19:14:59.964Z",
+    "client_name": "Johnell Walker",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b8022-72fc-755e-8679-4dc68a944965",
+    "customer_phone": "+16784963387",
+    "call_date": "2026-01-02T19:14:59.964Z",
+    "client_name": "Nicholas Daniels",
+    "count": 1,
+    "success": true,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b8022-72fc-755e-8679-4dc68a944965",
+    "customer_phone": "+16784963387",
+    "call_date": "2026-01-02T19:14:59.964Z",
+    "client_name": "Brittni Daniels",
+    "count": 1,
+    "success": true,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7c33-9f12-7448-bb92-3aed25cf2825",
+    "customer_phone": "+14707560056",
+    "call_date": "2026-01-02T00:55:16.498Z",
+    "client_name": "Ashley",
+    "count": 6,
+    "success": true,
+    "multiple_cases": true
+  },
+  {
+    "call_id": "019b7c33-9f12-7448-bb92-3aed25cf2825",
+    "customer_phone": "+14707560056",
+    "call_date": "2026-01-02T00:55:16.498Z",
+    "client_name": "Ashley",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7c33-9f12-7448-bb92-3aed25cf2825",
+    "customer_phone": "+14707560056",
+    "call_date": "2026-01-02T00:55:16.498Z",
+    "client_name": "Ashley",
+    "count": 1,
+    "success": true,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7613-6179-7ccd-bb9c-a509ca2fe86d",
+    "customer_phone": "+16148678212",
+    "call_date": "2025-12-31T20:22:20.281Z",
+    "client_name": "Christina",
+    "count": 10,
+    "success": true,
+    "multiple_cases": true
+  },
+  {
+    "call_id": "019b7613-6179-7ccd-bb9c-a509ca2fe86d",
+    "customer_phone": "+16148678212",
+    "call_date": "2025-12-31T20:22:20.281Z",
+    "client_name": "Christina",
+    "count": 10,
+    "success": true,
+    "multiple_cases": true
+  },
+  {
+    "call_id": "019b7613-6179-7ccd-bb9c-a509ca2fe86d",
+    "customer_phone": "+16148678212",
+    "call_date": "2025-12-31T20:22:20.281Z",
+    "client_name": "Christina",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7613-6179-7ccd-bb9c-a509ca2fe86d",
+    "customer_phone": "+16148678212",
+    "call_date": "2025-12-31T20:22:20.281Z",
+    "client_name": "Lastenia",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b75a1-da9b-7337-a8d4-37e77ae6d4a6",
+    "customer_phone": "+15026633948",
+    "call_date": "2025-12-31T18:18:20.187Z",
+    "client_name": "Nikki",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b75a1-da9b-7337-a8d4-37e77ae6d4a6",
+    "customer_phone": "+15026633948",
+    "call_date": "2025-12-31T18:18:20.187Z",
+    "client_name": "Nicole Loudon",
+    "count": 1,
+    "success": true,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7590-74a4-7446-b42c-7928159839e0",
+    "customer_phone": "+17023290078",
+    "call_date": "2025-12-31T17:59:19.972Z",
+    "client_name": "Marissa Forge",
+    "count": 1,
+    "success": true,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7590-74a4-7446-b42c-7928159839e0",
+    "customer_phone": "+17023290078",
+    "call_date": "2025-12-31T17:59:19.972Z",
+    "client_name": "Miki Hudson",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7590-74a4-7446-b42c-7928159839e0",
+    "customer_phone": "+17023290078",
+    "call_date": "2025-12-31T17:59:19.972Z",
+    "client_name": "Miki Hudson",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7561-e008-7ccd-bb28-6d311de40d09",
+    "customer_phone": "+15407256021",
+    "call_date": "2025-12-31T17:08:27.272Z",
+    "client_name": "Michelle Stevenson",
+    "count": 1,
+    "success": true,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7561-6d56-7ffe-9bba-bf62ccce415f",
+    "customer_phone": "+17024829315",
+    "call_date": "2025-12-31T17:07:57.910Z",
+    "client_name": "Dacian Barnett",
+    "count": 1,
+    "success": true,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7561-6d56-7ffe-9bba-bf62ccce415f",
+    "customer_phone": "+17024829315",
+    "call_date": "2025-12-31T17:07:57.910Z",
+    "client_name": "Janasia Wilson",
+    "count": 1,
+    "success": true,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7561-6d56-7ffe-9bba-bf62ccce415f",
+    "customer_phone": "+17024829315",
+    "call_date": "2025-12-31T17:07:57.910Z",
+    "client_name": "Inez Cole",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7561-6d56-7ffe-9bba-bf62ccce415f",
+    "customer_phone": "+17024829315",
+    "call_date": "2025-12-31T17:07:57.910Z",
+    "client_name": "Inas Cole",
+    "count": 1,
+    "success": true,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7561-6d56-7ffe-9bba-bf62ccce415f",
+    "customer_phone": "+17024829315",
+    "call_date": "2025-12-31T17:07:57.910Z",
+    "client_name": "Sebastian Carrioso",
+    "count": 1,
+    "success": true,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7561-6d56-7ffe-9bba-bf62ccce415f",
+    "customer_phone": "+17024829315",
+    "call_date": "2025-12-31T17:07:57.910Z",
+    "client_name": "Shaylee Hinton",
+    "count": 1,
+    "success": true,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7561-6d56-7ffe-9bba-bf62ccce415f",
+    "customer_phone": "+17024829315",
+    "call_date": "2025-12-31T17:07:57.910Z",
+    "client_name": "Tyra Voice",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7561-6d56-7ffe-9bba-bf62ccce415f",
+    "customer_phone": "+17024829315",
+    "call_date": "2025-12-31T17:07:57.910Z",
+    "client_name": "Tyra Weis",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7561-6d56-7ffe-9bba-bf62ccce415f",
+    "customer_phone": "+17024829315",
+    "call_date": "2025-12-31T17:07:57.910Z",
+    "client_name": "Tyra Wize",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7561-6d56-7ffe-9bba-bf62ccce415f",
+    "customer_phone": "+17024829315",
+    "call_date": "2025-12-31T17:07:57.910Z",
+    "client_name": "Tyra Wies",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7561-6d56-7ffe-9bba-bf62ccce415f",
+    "customer_phone": "+17024829315",
+    "call_date": "2025-12-31T17:07:57.910Z",
+    "client_name": "Mickey Mia Hudson",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7561-6d56-7ffe-9bba-bf62ccce415f",
+    "customer_phone": "+17024829315",
+    "call_date": "2025-12-31T17:07:57.910Z",
+    "client_name": "Mikimia Hudson",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7561-6d56-7ffe-9bba-bf62ccce415f",
+    "customer_phone": "+17024829315",
+    "call_date": "2025-12-31T17:07:57.910Z",
+    "client_name": "Dominic Lester",
+    "count": 1,
+    "success": true,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7561-6d56-7ffe-9bba-bf62ccce415f",
+    "customer_phone": "+17024829315",
+    "call_date": "2025-12-31T17:07:57.910Z",
+    "client_name": "Reginald Lestage",
+    "count": 2,
+    "success": true,
+    "multiple_cases": true
+  },
+  {
+    "call_id": "019b7561-6d56-7ffe-9bba-bf62ccce415f",
+    "customer_phone": "+17024829315",
+    "call_date": "2025-12-31T17:07:57.910Z",
+    "client_name": "Reginald Lestage",
+    "count": 1,
+    "success": true,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7561-6d56-7ffe-9bba-bf62ccce415f",
+    "customer_phone": "+17024829315",
+    "call_date": "2025-12-31T17:07:57.910Z",
+    "client_name": "Devon James",
+    "count": 1,
+    "success": true,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7561-6d56-7ffe-9bba-bf62ccce415f",
+    "customer_phone": "+17024829315",
+    "call_date": "2025-12-31T17:07:57.910Z",
+    "client_name": "Glen Isles",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7561-6d56-7ffe-9bba-bf62ccce415f",
+    "customer_phone": "+17024829315",
+    "call_date": "2025-12-31T17:07:57.910Z",
+    "client_name": "Glenn Isles",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b7561-6d56-7ffe-9bba-bf62ccce415f",
+    "customer_phone": "+17024829315",
+    "call_date": "2025-12-31T17:07:57.910Z",
+    "client_name": "Glenn Isles",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b74d9-f86b-799a-8861-e1115bf0c386",
+    "customer_phone": "+16693296714",
+    "call_date": "2025-12-31T14:40:00.619Z",
+    "client_name": "Larry Lugo",
+    "count": 1,
+    "success": true,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b74c3-e396-799e-9edf-9faf5e398ccf",
+    "customer_phone": "+12105318722",
+    "call_date": "2025-12-31T14:15:53.494Z",
+    "client_name": "Demont Nash",
+    "count": 1,
+    "success": true,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b74a0-a9df-7000-822c-795e4b6ef0de",
+    "customer_phone": "+17702806698",
+    "call_date": "2025-12-31T13:37:24.959Z",
+    "client_name": "w e h",
+    "count": 1,
+    "success": true,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b71ee-32a2-7330-8e25-3d26eb8c5aac",
+    "customer_phone": "+14702288669",
+    "call_date": "2025-12-31T01:03:14.594Z",
+    "client_name": "Armen Gibson",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  },
+  {
+    "call_id": "019b71ee-32a2-7330-8e25-3d26eb8c5aac",
+    "customer_phone": "+14702288669",
+    "call_date": "2025-12-31T01:03:14.594Z",
+    "client_name": "Harmon Gibson Gypsum",
+    "count": 0,
+    "success": false,
+    "multiple_cases": false
+  }
+]

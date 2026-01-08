@@ -49,7 +49,7 @@ If caller says "That's not me" or "I'm calling for someone else":
 ```
 Hands off to the Existing Client agent for callers who identify as current clients but were NOT pre-identified by phone lookup.
 
-PREREQUISITE: You MUST have the caller's name before calling this tool.
+PREREQUISITE: You MUST have the caller's FULL name (first AND last) before calling this tool.
 
 Use this destination when the caller:
 - Says "I'm a client" or "I have a case with you"
@@ -57,16 +57,21 @@ Use this destination when the caller:
 - Asks about case status, case updates, or wants to speak with their case manager
 - AND case_details is NULL (phone did not match)
 
-If the caller has not provided their name yet:
+If the caller has not provided their FULL name yet:
 1. Do NOT call this tool
-2. First ask: "Sure, I can help with your case. May I have your name?"
+2. First ask: "Sure, I can help with your case. May I have your full name?"
 3. Wait for their response
-4. Only then call this tool
+4. If they give only first name, ask: "And your last name?"
+5. Wait for their response
+6. Only then call this tool with the full name
 
 Do NOT use this destination if:
 - case_details is populated (use Pre-Identified Client instead)
 - Caller is asking about someone ELSE's case (use Family Member instead)
 - Caller is NEW and had an accident (use New Client instead)
+- Caller is an existing client but wants representation for a NEW/DIFFERENT legal matter
+  (e.g., "I have a car accident case with you, but I want to open a medical malpractice case")
+  → Use New Client instead - treat them as a new intake for the new matter
 ```
 
 **Variables Expected:**
@@ -169,7 +174,7 @@ Collect if possible:
 ```
 Hands off to the New Client agent for people who had an accident and may need legal representation.
 
-PREREQUISITE: You MUST have the caller's name before calling this tool.
+PREREQUISITE: You MUST have the caller's FULL name (first AND last) before calling this tool.
 
 Use this destination when the caller:
 - Says "I was in an accident" or "I had an accident"
@@ -178,12 +183,17 @@ Use this destination when the caller:
 - Asks "Do I have a case?"
 - Describes an injury or incident that just happened
 - Is clearly a potential new client, not an existing one
+- Is an EXISTING client who wants to open a NEW/SEPARATE case for a different matter
+  (e.g., "I have a car accident case with you, but I want representation for a medical malpractice case")
+  → Treat them as a new intake for the new matter
 
-If the caller has not provided their name yet:
+If the caller has not provided their FULL name yet:
 1. Do NOT call this tool
-2. First ask: "I'm sorry to hear that. May I have your name?"
+2. First ask: "I'm sorry to hear that. May I have your full name?"
 3. Wait for their response
-4. Only then call this tool
+4. If they give only first name, ask: "And your last name?"
+5. Wait for their response
+6. Only then call this tool with the full name
 
 Do NOT use this destination if:
 - Caller says "I'm already a client" → Use Existing Client instead
@@ -271,6 +281,14 @@ If the caller has not provided their name yet:
 Do NOT use this destination if:
 - Caller asks for "a case manager" or "someone in billing" (generic role, not a name)
 - Caller wants to speak with "my case manager" → Use Existing Client to look up their assigned manager
+- Caller asks for "front desk", "operator", "representative", "receptionist", "human", "a person", "someone" → These are general help requests, route to customer_success
+- Caller mentions a role/title (lawyer, attorney, paralegal, billing, etc.) AND says "I don't know" or cannot provide a specific person's name when asked
+
+IMPORTANT - Role vs Name Detection:
+These are ROLES/GENERAL REQUESTS, not names: "lawyer", "attorney", "case manager", "front desk", "receptionist", "operator", "human", "representative", "paralegal", "billing", "accounting", "someone", "anyone"
+Only use this destination when caller provides an ACTUAL person's name (first name, last name, or full name).
+
+If caller says a role but doesn't know the specific name → Route to customer_success (they'll help find the right person)
 ```
 
 **Variables Expected:**
@@ -496,6 +514,7 @@ Do NOT use this destination if:
 3. **Insurance + Billing = Insurance** - Never route insurance to Vendor
 4. **Medical + Billing = Vendor** - Medical billing goes to Vendor, not Medical Provider
 5. **Spanish = QUICK** - Don't delay Spanish speakers collecting info
+6. **Existing Client + New Matter = New Client** - If caller has an existing case BUT wants representation for a NEW/DIFFERENT matter, route to New Client (new intake), not Existing Client
 
 ---
 

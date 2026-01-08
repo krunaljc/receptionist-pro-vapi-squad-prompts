@@ -1,0 +1,1178 @@
+[
+  {
+    "call_id": "019b8062-3f97-7223-a794-940ed3607f5d",
+    "phone": "+16784963387",
+    "created_at": "2026-01-02T20:24:41.111Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": true
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "3",
+            "success": "1",
+            "searches": "4"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "no_search"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "success"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b8022-72fc-755e-8679-4dc68a944965",
+    "phone": "+16784963387",
+    "created_at": "2026-01-02T19:14:59.964Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": true
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "11",
+            "success": "5",
+            "searches": "16"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "no_search"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "success"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b7c33-9f12-7448-bb92-3aed25cf2825",
+    "phone": "+14707560056",
+    "created_at": "2026-01-02T00:55:16.498Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": true
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "1",
+            "success": "2",
+            "searches": "3"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "no_search"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "success"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b7aeb-8b4a-744a-ac36-b8b979722725",
+    "phone": "+19384631293",
+    "created_at": "2026-01-01T18:56:55.626Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": true
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "no_search"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "no_search"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b7ae7-198a-7998-838b-afff751e7470",
+    "phone": "+19384631293",
+    "created_at": "2026-01-01T18:52:04.362Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": true
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "1",
+            "success": "0",
+            "searches": "1"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "failure"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "no_search"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b7ab8-9144-7bbf-9929-9bc54477a768",
+    "phone": "+16783289522",
+    "created_at": "2026-01-01T18:01:14.820Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": true
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "1",
+            "success": "1",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "success"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "no_search"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b7719-0273-7000-8000-5d54dac62f83",
+    "phone": "+17704774479",
+    "created_at": "2026-01-01T01:08:06.387Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": true
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "no_search"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "no_search"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b768d-97ca-744a-ab22-2b931590ee1e",
+    "phone": "+16782604904",
+    "created_at": "2025-12-31T22:35:49.578Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": true
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "no_search"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "no_search"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b7613-6179-7ccd-bb9c-a509ca2fe86d",
+    "phone": "+16148678212",
+    "created_at": "2025-12-31T20:22:20.281Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": true
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "2",
+            "success": "2",
+            "searches": "4"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "no_search"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "success"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b75c5-ce1f-7cc1-b238-692c5b877384",
+    "phone": "+17702409506",
+    "created_at": "2025-12-31T18:57:36.287Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": false
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "no_search"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "no_search"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b75a1-da9b-7337-a8d4-37e77ae6d4a6",
+    "phone": "+15026633948",
+    "created_at": "2025-12-31T18:18:20.187Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": true
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "1",
+            "success": "1",
+            "searches": "2"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "no_search"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "success"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b7594-089f-7ffe-9bde-32b7c01621ad",
+    "phone": "+14706558902",
+    "created_at": "2025-12-31T18:03:14.463Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": false
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "no_search"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "no_search"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b7590-74a4-7446-b42c-7928159839e0",
+    "phone": "+17023290078",
+    "created_at": "2025-12-31T17:59:19.972Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": true
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "2",
+            "success": "1",
+            "searches": "3"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "no_search"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "success"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b7561-e008-7ccd-bb28-6d311de40d09",
+    "phone": "+15407256021",
+    "created_at": "2025-12-31T17:08:27.272Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": true
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "1",
+            "searches": "1"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "no_search"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "success"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b7561-6d56-7ffe-9bba-bf62ccce415f",
+    "phone": "+17024829315",
+    "created_at": "2025-12-31T17:07:57.910Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": true
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "error": "Expecting value: line 1 column 1 (char 0)"
+      },
+      "Staff Directory Result": {
+        "error": "Expecting value: line 1 column 1 (char 0)"
+      },
+      "Case Search Result - call level": {
+        "error": "Expecting value: line 1 column 1 (char 0)"
+      }
+    }
+  },
+  {
+    "call_id": "019b753b-447c-711e-a60c-f34cdbe0495c",
+    "phone": "+919755744181",
+    "created_at": "2025-12-31T16:26:17.084Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "error": "Expecting value: line 1 column 1 (char 0)"
+      },
+      "staff directory result - tool call level": {
+        "error": "Expecting value: line 1 column 1 (char 0)"
+      },
+      "Case search results - tool call level": {
+        "error": "Expecting value: line 1 column 1 (char 0)"
+      },
+      "Staff Directory Result": {
+        "error": "Expecting value: line 1 column 1 (char 0)"
+      },
+      "Case Search Result - call level": {
+        "error": "Expecting value: line 1 column 1 (char 0)"
+      }
+    }
+  },
+  {
+    "call_id": "019b753a-db84-7aae-8753-74135b8c1856",
+    "phone": "+918401871871",
+    "created_at": "2025-12-31T16:25:50.212Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "error": "Expecting value: line 1 column 1 (char 0)"
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "1",
+            "success": "0",
+            "searches": "1"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "failure"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "no_search"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b750b-29e5-711e-ac52-72185fd6fe24",
+    "phone": "+17706175037",
+    "created_at": "2025-12-31T15:33:44.549Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": true
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "1",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "success"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "no_search"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b7508-80d3-7228-b0a1-ec8fc462118e",
+    "phone": "+14702983258",
+    "created_at": "2025-12-31T15:30:50.195Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": false
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "no_search"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "no_search"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b7506-207d-7eea-81de-0f3c32f4fd96",
+    "phone": "+17706175037",
+    "created_at": "2025-12-31T15:28:14.461Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": true
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "no_search"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "no_search"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b74e0-71cb-744c-b9f1-f96898641486",
+    "phone": "+18134345965",
+    "created_at": "2025-12-31T14:47:04.907Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": false
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "no_search"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "no_search"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b74d9-f86b-799a-8861-e1115bf0c386",
+    "phone": "+16693296714",
+    "created_at": "2025-12-31T14:40:00.619Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": true
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "1",
+            "searches": "1"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "no_search"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "success"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b74c3-e396-799e-9edf-9faf5e398ccf",
+    "phone": "+12105318722",
+    "created_at": "2025-12-31T14:15:53.494Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": true
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "1",
+            "searches": "1"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "no_search"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "success"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b74a0-a9df-7000-822c-795e4b6ef0de",
+    "phone": "+17702806698",
+    "created_at": "2025-12-31T13:37:24.959Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": true
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "1",
+            "searches": "1"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "no_search"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "success"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b7484-9058-7777-8792-0d03a3d2b50e",
+    "phone": "+15028892368",
+    "created_at": "2025-12-31T13:06:43.416Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": true
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "1",
+            "success": "1",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "success"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "no_search"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b71ee-32a2-7330-8e25-3d26eb8c5aac",
+    "phone": "+14702288669",
+    "created_at": "2025-12-31T01:03:14.594Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": true
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "2",
+            "success": "0",
+            "searches": "2"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "no_search"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "failure"
+        }
+      }
+    }
+  },
+  {
+    "call_id": "019b7100-c1d0-700b-aea1-b39f0586f0d3",
+    "phone": "+16788866138",
+    "created_at": "2025-12-30T20:43:53.680Z",
+    "structured_outputs": {
+      "caller name captured": {
+        "6177d53a-f4c2-41bb-89f7-10876ea9a9cf": {
+          "name": "caller name captured",
+          "result": false
+        }
+      },
+      "staff directory result - tool call level": {
+        "07ec8ad8-4175-4cc1-b031-9af3224ae378": {
+          "name": "staff directory result - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Case search results - tool call level": {
+        "7f36019f-c773-4a55-b3b8-6e4bc46430d2": {
+          "name": "Case search results - tool call level",
+          "result": {
+            "failure": "0",
+            "success": "0",
+            "searches": "0"
+          }
+        }
+      },
+      "Staff Directory Result": {
+        "2d876216-d680-4a64-9392-b61dc850d406": {
+          "name": "Staff Directory Result",
+          "result": "no_search"
+        }
+      },
+      "Case Search Result - call level": {
+        "8bca1ce2-a5db-48ae-b98f-e0e7ad6db59b": {
+          "name": "Case Search Result - call level",
+          "result": "no_search"
+        }
+      }
+    }
+  }
+]

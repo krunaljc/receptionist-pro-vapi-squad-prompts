@@ -1,0 +1,199 @@
+{
+  "id": "7ae431c2-2bc4-4cb0-8189-1b04b0131832",
+  "orgId": "4238e583-7f08-43dc-b89c-edb33175dfac",
+  "createdAt": "2026-01-07T10:13:44.495Z",
+  "updatedAt": "2026-01-07T10:13:44.495Z",
+  "members": [
+    {
+      "assistantId": "f76c8234-26c4-45f8-ab66-cc34edcf956f",
+      "assistantOverrides": {
+        "model": {
+          "model": "gpt-4.1",
+          "provider": "openai"
+        },
+        "tools:append": [
+          {
+            "type": "handoff",
+            "async": false,
+            "function": {
+              "name": "handoff_to_insurance"
+            },
+            "messages": [],
+            "destinations": [
+              {
+                "type": "assistant",
+                "assistantId": "bd4f1ff5-7555-4e7f-9ea1-c037b6bbec56",
+                "description": "Hands off to the Insurance Adjuster agent for callers from insurance companies.\n\nPREREQUISITE: You MUST have the caller's name before calling this tool.\n\nUse this destination when the caller:\n- Identifies as an insurance adjuster or claims representative\n- Mentions they're from: State Farm, Progressive, GEICO, Allstate, USAA, Farmers, Liberty Mutual, Nationwide, or any other insurance company\n- Says \"I'm calling about a claim\" or \"regarding a claim\"\n- Uses phrases like \"I'm the adjuster on this case\"\n\nIMPORTANT - Insurance + Billing = Still Insurance:\nIf an insurance caller mentions billing, invoices, or payments, they are STILL an insurance adjuster. Do NOT route to Vendor.\n\nIf the caller has not provided their name yet:\n1. Do NOT call this tool\n2. First ask: \"Sure, I can help. May I have your name and which insurance company you're with?\"\n3. Wait for their response\n4. Only then call this tool\n\nCollect if possible (but don't block handoff):\n- Organization name (insurance company)\n- Client name (the claimant/patient they're calling about)"
+              }
+            ]
+          },
+          {
+            "type": "handoff",
+            "async": false,
+            "function": {
+              "name": "handoff_to_existing_client"
+            },
+            "messages": [],
+            "destinations": [
+              {
+                "type": "assistant",
+                "assistantId": "c3019349-729e-42df-a367-48245e75c1ad",
+                "description": "Hands off to the Existing Client agent for callers who identify as current clients.\n\nPREREQUISITE: You MUST have the caller's name before calling this tool.\n\nUse this destination when the caller:\n- Says \"I'm a client\" or \"I have a case with you\"\n- Mentions \"my case\", \"my case manager\", \"my settlement\", \"my attorney\"\n- Asks about case status, case updates, or wants to speak with their case manager\n- AND case_details is NULL (phone did not match)\n\nIf the caller has not provided their name yet:\n1. Do NOT call this tool\n2. First ask: \"Sure, I can help with your case. May I have your name?\"\n3. Wait for their response\n4. Only then call this tool\n\nDo NOT use this destination if:\n- Caller is asking about someone ELSE's case (use Family Member instead)\n- Caller is NEW and had an accident (use New Client instead)"
+              }
+            ]
+          },
+          {
+            "type": "handoff",
+            "async": false,
+            "function": {
+              "name": "handoff_to_medical_provider"
+            },
+            "messages": [],
+            "destinations": [
+              {
+                "type": "assistant",
+                "assistantId": "f61ed81a-9835-4903-a86d-cdf010f77951",
+                "description": "Hands off to the Medical Provider agent for callers from hospitals, clinics, doctor's offices, or medical facilities.\n\nPREREQUISITE: You MUST have the caller's name before calling this tool.\n\nUse this destination when the caller:\n- Identifies as calling from a hospital, clinic, or doctor's office\n- Mentions patient care, treatment coordination, or medical records\n- Is a nurse, medical assistant, or healthcare provider\n\nIf the caller has not provided their name yet:\n1. Do NOT call this tool\n2. First ask: \"Sure, I can help. May I have your name and which facility you're calling from?\"\n3. Wait for their response\n4. Only then call this tool"
+              }
+            ]
+          },
+          {
+            "type": "handoff",
+            "async": false,
+            "function": {
+              "name": "handoff_to_new_client"
+            },
+            "messages": [],
+            "destinations": [
+              {
+                "type": "assistant",
+                "assistantId": "fc2f0561-f714-41cf-adc3-014f356adaa9",
+                "description": "Hands off to the New Client agent for potential new clients who were in an accident.\n\nPREREQUISITE: You MUST have the caller's name before calling this tool.\n\nUse this destination when the caller:\n- Says they were in an accident (car, truck, motorcycle, slip and fall, etc.)\n- Asks about hiring a lawyer or attorney\n- Is NOT an existing client\n- Mentions \"I need help with my case\" but is clearly new\n\nIf the caller has not provided their name yet:\n1. Do NOT call this tool\n2. First ask: \"I'd be happy to help. May I have your name?\"\n3. Wait for their response\n4. Only then call this tool"
+              }
+            ]
+          },
+          {
+            "type": "handoff",
+            "async": false,
+            "function": {
+              "name": "handoff_to_vendor"
+            },
+            "messages": [],
+            "destinations": [
+              {
+                "type": "assistant",
+                "assistantId": "3ec9d20a-c1c3-40d7-bb90-d517b8158c9c",
+                "description": "Hands off to the Vendor agent for invoice and billing inquiries from vendors or medical facilities with billing matters.\n\nPREREQUISITE: You MUST have the caller's name before calling this tool.\n\nUse this destination when the caller:\n- Says \"I'm calling about an invoice\" or \"outstanding balance\"\n- Mentions billing, payment status, or accounts payable\n- Is from a medical facility AND specifically mentions billing/payment (not patient care)\n- Asks \"When will we receive payment?\"\n\nIMPORTANT - Medical + Billing = Vendor:\nIf a medical facility caller's purpose is billing/payment, route here. If their purpose is patient care coordination, use Medical Provider instead.\n\nEXCEPTION - Insurance + Billing = Insurance:\nIf the caller is from an insurance company and mentions billing, they are STILL an insurance adjuster. Use Insurance Adjuster instead.\n\nIf the caller has not provided their name yet:\n1. Do NOT call this tool\n2. First ask: \"Sure, I can help with that. May I have your name and company?\"\n3. Wait for their response\n4. Only then call this tool"
+              }
+            ]
+          },
+          {
+            "type": "handoff",
+            "async": false,
+            "function": {
+              "name": "handoff_to_direct_staff"
+            },
+            "messages": [],
+            "destinations": [
+              {
+                "type": "assistant",
+                "assistantId": "d5acdcf4-fcfe-4506-b297-b6840dab1579",
+                "description": "Hands off to the Direct Staff Request agent when a caller asks for a specific staff member by name.\n\nHIGHEST PRIORITY: This destination overrides all other routing logic.\n\nPREREQUISITE: The caller MUST have mentioned a specific staff member's name.\nPREREQUISITE: You should collect the caller's name before calling this tool.\n\nUse this destination when the caller:\n- Says \"Can I speak with [Name]?\" or \"Is [Name] available?\"\n- Asks for someone by first name, last name, or full name\n- Says \"I'm trying to reach [Name]\"\n- Mentions a specific person before stating their purpose\n\nExamples:\n- \"Hi, is Sarah Johnson available?\" \u2192 Use this destination\n- \"I need to speak with Mr. Thompson\" \u2192 Use this destination\n- \"Can you transfer me to the case manager?\" \u2192 Do NOT use (no specific name)\n\nIf the caller has not provided their name yet:\n1. Do NOT call this tool\n2. First ask: \"Sure, I can try to reach [Name]. May I have your name?\"\n3. Wait for their response\n4. Only then call this tool\n\nDo NOT use this destination if:\n- Caller asks for \"a case manager\" or \"someone in billing\" (generic role, not a name)\n- Caller wants to speak with \"my case manager\" \u2192 Use Existing Client to look up their assigned manager"
+              }
+            ]
+          },
+          {
+            "type": "handoff",
+            "async": false,
+            "function": {
+              "name": "handoff_to_legal_caller"
+            },
+            "messages": [],
+            "destinations": [
+              {
+                "type": "assistant",
+                "assistantId": "8fcbbf13-8e02-49c0-98d4-a9d0f6ad7b4d",
+                "description": "Hands off to the Legal System agent for court reporters, defense attorneys, court clerks, and process servers.\n\nPREREQUISITE: You MUST have the caller's name before calling this tool.\n\nUse this destination when the caller:\n- Identifies as a court reporter, defense attorney, court clerk, or process server\n- Mentions depositions, subpoenas, court filings, or hearings\n- Is from opposing counsel's office\n- Needs to serve documents or schedule legal proceedings\n- References case numbers or court dates\n\nIf the caller has not provided their name yet:\n1. Do NOT call this tool\n2. First ask: \"Sure, I can help. May I have your name and where you're calling from?\"\n3. Wait for their response\n4. Only then call this tool\n\nDo NOT use this destination if:\n- Caller is our client asking about their court date \u2192 Use Existing Client\n- Caller is from an insurance company \u2192 Use Insurance Adjuster"
+              }
+            ]
+          },
+          {
+            "type": "handoff",
+            "async": false,
+            "function": {
+              "name": "handoff_to_spanish_speaker"
+            },
+            "messages": [],
+            "destinations": [
+              {
+                "type": "assistant",
+                "assistantId": "895dfb0a-5ff4-439c-91e9-3d51ccc346a5",
+                "description": "Hands off to the Spanish Speaker agent for callers who speak Spanish.\n\nUse this destination when the caller:\n- Speaks Spanish or asks for Spanish assistance\n- Says \"Habla espa\u00f1ol?\" or similar\n- Has difficulty communicating in English\n\nThis is a quick handoff - do NOT delay to collect name. Language barrier situations require immediate transfer."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "assistantId": "c3019349-729e-42df-a367-48245e75c1ad"
+    },
+    {
+      "assistantId": "bd4f1ff5-7555-4e7f-9ea1-c037b6bbec56",
+      "assistantOverrides": {
+        "model": {
+          "model": "gpt-4.1",
+          "provider": "openai"
+        }
+      }
+    },
+    {
+      "assistantId": "f61ed81a-9835-4903-a86d-cdf010f77951",
+      "assistantOverrides": {
+        "model": {
+          "model": "gpt-4.1",
+          "provider": "openai"
+        }
+      }
+    },
+    {
+      "assistantId": "fc2f0561-f714-41cf-adc3-014f356adaa9"
+    },
+    {
+      "assistantId": "3ec9d20a-c1c3-40d7-bb90-d517b8158c9c",
+      "assistantOverrides": {
+        "model": {
+          "model": "gpt-4.1",
+          "provider": "openai"
+        }
+      }
+    },
+    {
+      "assistantId": "d5acdcf4-fcfe-4506-b297-b6840dab1579"
+    },
+    {
+      "assistantId": "895dfb0a-5ff4-439c-91e9-3d51ccc346a5",
+      "assistantOverrides": {
+        "model": {
+          "model": "gpt-4.1",
+          "provider": "openai"
+        }
+      }
+    },
+    {
+      "assistantId": "8fcbbf13-8e02-49c0-98d4-a9d0f6ad7b4d"
+    }
+  ],
+  "name": "Receptionist Pro - Sandbox v1",
+  "membersOverrides": {
+    "transcriber": {
+      "model": "flux-general-en",
+      "language": "en",
+      "provider": "deepgram"
+    },
+    "model": {
+      "model": "gpt-4.1",
+      "provider": "openai"
+    }
+  }
+}
