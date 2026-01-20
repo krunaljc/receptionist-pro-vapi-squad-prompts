@@ -53,7 +53,7 @@ The **strict** variant will require thorough caller verification before sharing 
 | 1 | Greeter Classifier | Collects name, purpose, routes | handoff_tool, staff_directory_lookup |
 | 3 | Existing Client | Non-pre-identified existing clients | search_case_details, staff_directory_lookup, transfer_call |
 | 4 | Insurance Adjuster | Insurance company representatives | search_case_details, transfer_call |
-| 5 | Medical Provider | Hospitals, clinics (NOT billing) | search_case_details, transfer_call |
+| 5 | Medical Provider | Hospitals, clinics - fax redirect (third-party) | transfer_call |
 | 6 | New Client | People who need a lawyer | transfer_call |
 | 7 | Vendor | Invoice/billing callers | transfer_call |
 | 8 | Direct Staff Request | Specific staff requests | staff_directory_lookup, transfer_call |

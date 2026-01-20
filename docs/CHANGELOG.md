@@ -4,6 +4,54 @@ All notable changes to the VAPI Squad Prompts are documented in this file.
 
 ---
 
+## [2026-01-20] - Medical Provider Agent: Third-Party Policy
+
+### Policy Change: Medical Providers Now Treated as Third Parties
+
+**Problem:** The Medical Provider Agent was configured to look up case details and share case manager information, phone numbers, emails, case status, and incident dates with medical providers. This created privacy/compliance risk.
+
+**New Policy:** Medical providers are now treated as third parties. They should NOT receive any case information directly.
+
+**New Behavior:**
+- Redirect all case-related inquiries to fax: `(972) 332-2361`
+- Provide privacy/compliance explanation when asked why
+- Take messages for general (non-case) inquiries only
+- Do NOT look up or share any case details
+
+**Files Changed:**
+
+1. `prompts/squad/strict/assistants/05_medical_provider.md`
+   - Updated role description: "redirect to fax per third-party policy"
+   - Removed `search_case_details` and `staff_directory_lookup` tool references
+   - Changed from 3 tools to 1 tool: `transfer_call` (for misclassification only)
+   - Updated Goals: inform of fax policy, provide fax number, take message if needed
+   - Replaced entire Task section with fax redirect flow:
+     - Step 1: Acknowledge and redirect to fax
+     - Step 2: Handle pushback with privacy/compliance explanation
+     - Step 3: Optional message taking for non-case inquiries
+     - Step 4: Stay silent after providing info
+   - Updated "What You CAN Share": fax number, general firm info
+   - Updated "What You CANNOT Share": ALL case-specific info, client info
+   - Removed Multi-Case Handling section (no longer applicable)
+   - Updated Tools Required section with policy note
+
+2. `README.md`
+   - Updated Squad Architecture table: Medical Provider now shows "fax redirect (third-party)" with only `transfer_call`
+
+**Fax Number:** `(972) 332-2361`
+**Voice Format:** `<spell>972</spell><break time="200ms"/><spell>332</spell><break time="200ms"/><spell>2361</spell>`
+
+---
+
+### Action Required: VAPI Dashboard Update
+
+The above changes need to be applied in the VAPI dashboard:
+1. Update Medical Provider assistant prompt with new fax redirect flow
+2. Remove `search_case_details` tool from Medical Provider assistant
+3. Remove `staff_directory_lookup` tool from Medical Provider assistant (if present)
+
+---
+
 ## [2026-01-19] - Correction: Remove take_message tool
 
 **Issue:** Previous sync incorrectly retained `take_message` tool which does NOT exist in production.
