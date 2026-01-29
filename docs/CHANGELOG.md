@@ -4,6 +4,86 @@ All notable changes to the VAPI Squad Prompts are documented in this file.
 
 ---
 
+## [2026-01-29] - Greeter Tool Call Rules Fix
+
+### Fix: Greeter Agent Says "I'll get you to someone" Without Calling Handoff Tool
+
+**Problem:** Insurance caller (Gaby from Atlantic Casualty Insurance calling about client Grecia Orellana) was never transferred. The Greeter agent said "I'll get you to the right person" and "One moment please" multiple times, but never actually called the handoff tool. The call died from silence after repeated "Are you still there?" prompts.
+
+**Evidence from call:**
+| Timestamp | Agent Said | Tool Called? |
+|-----------|------------|--------------|
+| 7:32:29 | "I'll get you to the right person." | No |
+| 7:32:38 | "You're welcome." | No |
+| 7:32:53 | "One moment while I get you to the right person." | No |
+| 7:33:00 | "You're welcome." | No |
+| ... | Pattern continues... | No |
+
+The agent **correctly identified** the caller as insurance ("you're with Atlantic Casualty") and had all required info, but **never invoked `route_to_specialist`**.
+
+**Root Cause:** Step 5 (Route) instruction was poorly written - it focused on what NOT to do rather than what TO DO:
+
+```
+**Step 5: Route**
+Based on what you've learned, trigger the appropriate handoff tool.
+Do NOT say anything when triggering the handoff - just trigger it silently.
+```
+
+The agent interpreted this as:
+1. I should acknowledge the caller first → "I'll get you to the right person"
+2. I violated "don't say anything" rule by speaking
+3. Now I'm unsure whether to call the tool since I already spoke
+
+The instruction lacked explicit "MUST call the tool" language. Combined with weak Response Guidelines that only said "If about to hand off, trigger tool with NO text response", the agent got stuck in a loop of acknowledgments without action.
+
+**Additional Issue:** Agent responded to caller's "Thank you" with "You're welcome" instead of routing:
+```
+Agent: "I'll get you to the right person."
+User: "Yeah. Okay. Thank you."
+Agent: "You're welcome."  ← Should have called tool here
+```
+The caller's "Thank you" was confirmation to proceed, not a prompt for social pleasantries.
+
+**Solution:**
+
+1. **Rewrote Step 5** to emphasize the MANDATORY tool call:
+   - Changed from: "trigger the appropriate handoff tool... Do NOT say anything"
+   - Changed to: "IMMEDIATELY call the route_to_specialist handoff tool... MANDATORY: You MUST call the tool."
+   - Added clear hierarchy: Preferred (silent) → Acceptable (text + tool) → FORBIDDEN (text without tool)
+
+2. **Added `[Handoff Rules - CRITICAL]` section** with:
+   - Explicit rule that caller's "thank you"/"okay" after routing indication = confirmation to proceed, not a prompt for pleasantries
+   - NEVER/ALWAYS examples showing correct vs incorrect behavior
+
+**Files Changed:**
+
+1. `prompts/squad/lenient/assistants/01_greeter_classifier.md`
+   - Rewrote Step 5 with MANDATORY tool call language and clear hierarchy
+   - Added `[Handoff Rules - CRITICAL]` section with "thank you = proceed" rule and NEVER/ALWAYS examples
+
+2. `prompts/squad/strict/assistants/01_greeter_classifier.md`
+   - Same changes as lenient variant
+
+**Expected Results After Fix:**
+- Greeter will call `route_to_specialist` immediately when ready to hand off
+- No more "I'll get you to the right person" without the tool call in the same response
+- Insurance callers (and all other caller types) will be routed without silence loops
+
+**Verification Test:**
+1. Call with insurance identifier: "Hi, I'm calling from State Farm about a claim"
+2. Provide client name when asked
+3. Greeter should handoff **silently** (or with minimal acknowledgment + tool call in same response) to Insurance Adjuster
+4. No repeated "one moment" or "I'll get you to someone" without transfer
+
+---
+
+### Action Required: VAPI Dashboard Update
+
+The above changes need to be applied in the VAPI dashboard:
+1. Update Greeter Classifier assistant prompt with new Response Guidelines and `[Tool Call Rules - CRITICAL]` section
+
+---
+
 ## [2026-01-28] - Fallback Line Agent Delayed Transfer Fix
 
 ### Fix: Fallback Line Agent 36-Second Transfer Delay
