@@ -19,32 +19,47 @@ All notable changes to the VAPI Squad Prompts are documented in this file.
 | 7:33:00 | "You're welcome." | No |
 | ... | Pattern continues... | No |
 
-The agent **never invoked `route_to_specialist`**. Every acknowledgment was just speech with no corresponding tool call.
+The agent **correctly identified** the caller as insurance ("you're with Atlantic Casualty") and had all required info, but **never invoked `route_to_specialist`**.
 
-**Root Cause:** The Greeter prompt lacked the `[Tool Call Rules - CRITICAL]` section that other agents have. While other agents (Insurance Adjuster, Fallback Line, Direct Staff Request) have explicit rules like:
+**Root Cause:** Step 5 (Route) instruction was poorly written - it focused on what NOT to do rather than what TO DO:
 
 ```
-⚠️ STATEMENT WITHOUT TOOL = SILENCE DEATH
-If you say ANY phrase implying action ("hang on", "let me check", "one moment") without calling a tool in the SAME response, the system will wait for user input and the call will die from silence.
+**Step 5: Route**
+Based on what you've learned, trigger the appropriate handoff tool.
+Do NOT say anything when triggering the handoff - just trigger it silently.
 ```
 
-The Greeter only had a weak instruction at line 56:
-```
-- If about to hand off, trigger tool with NO text response
-```
+The agent interpreted this as:
+1. I should acknowledge the caller first → "I'll get you to the right person"
+2. I violated "don't say anything" rule by speaking
+3. Now I'm unsure whether to call the tool since I already spoke
 
-This was insufficient to prevent the anti-pattern where the model says acknowledgment phrases without calling the tool.
+The instruction lacked explicit "MUST call the tool" language. Combined with weak Response Guidelines that only said "If about to hand off, trigger tool with NO text response", the agent got stuck in a loop of acknowledgments without action.
 
-**Solution:** Added `[Tool Call Rules - CRITICAL]` section to Greeter prompt matching the pattern used in other agents (especially `08_direct_staff_request.md`).
+**Additional Issue:** Agent responded to caller's "Thank you" with "You're welcome" instead of routing:
+```
+Agent: "I'll get you to the right person."
+User: "Yeah. Okay. Thank you."
+Agent: "You're welcome."  ← Should have called tool here
+```
+The caller's "Thank you" was confirmation to proceed, not a prompt for social pleasantries.
+
+**Solution:**
+
+1. **Rewrote Step 5** to emphasize the MANDATORY tool call:
+   - Changed from: "trigger the appropriate handoff tool... Do NOT say anything"
+   - Changed to: "IMMEDIATELY call the route_to_specialist handoff tool... MANDATORY: You MUST call the tool."
+   - Added clear hierarchy: Preferred (silent) → Acceptable (text + tool) → FORBIDDEN (text without tool)
+
+2. **Added `[Handoff Rules - CRITICAL]` section** with:
+   - Explicit rule that caller's "thank you"/"okay" after routing indication = confirmation to proceed, not a prompt for pleasantries
+   - NEVER/ALWAYS examples showing correct vs incorrect behavior
 
 **Files Changed:**
 
 1. `prompts/squad/lenient/assistants/01_greeter_classifier.md`
-   - Updated Response Guidelines: strengthened the handoff instruction to clarify tool must be in same response if any text is output
-   - Added `[Tool Call Rules - CRITICAL]` section with:
-     - WRONG/CORRECT examples for handoff tool calls
-     - `⚠️ STATEMENT WITHOUT TOOL = SILENCE DEATH` warning
-     - NEVER/ALWAYS examples specific to Greeter's routing behavior
+   - Rewrote Step 5 with MANDATORY tool call language and clear hierarchy
+   - Added `[Handoff Rules - CRITICAL]` section with "thank you = proceed" rule and NEVER/ALWAYS examples
 
 2. `prompts/squad/strict/assistants/01_greeter_classifier.md`
    - Same changes as lenient variant

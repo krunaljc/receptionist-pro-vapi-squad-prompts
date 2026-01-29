@@ -223,4 +223,4 @@ Each handoff includes `variableExtractionPlan` to pass context:
 - [ ] After-hours handling
 - [ ] Frustrated caller → priority escalation
 - [ ] Fallback line → customer success transfer (verify transfer_call invoked within 5s of handoff)
-- [ ] Greeter handoff → verify no "one moment" without tool call (should route silently or with tool in same response)
+- [ ] Greeter handoff → verify route_to_specialist called immediately (no "one moment" without tool, no "you're welcome" after caller's "thank you")
