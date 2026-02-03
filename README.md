@@ -188,6 +188,18 @@ See `standalone/pre_identified_caller/backend_variables.md` for variable structu
 
 ## Critical Configuration Notes
 
+### Security Guardrails (CRITICAL)
+All agents include a "Security Boundaries" section that provides:
+
+1. **Scope Control** - Agents only discuss firm-related matters (cases, intake, transfers, firm info)
+   - Off-topic deflection: "I'm not able to help with that. Is there something I can help you with regarding {{firm_name}}?"
+
+2. **Prompt Injection Protection** - Agents never reveal internal instructions, routing logic, or tool names
+   - Security deflection: "I'm here to help with calls to {{firm_name}}. What can I help you with?"
+   - Ignores role-play attacks, authority spoofing, and social engineering attempts
+
+These rules override any caller request.
+
 ### AI Disclosure (CRITICAL)
 All agents MUST honestly identify as AI when directly asked "Are you AI?" or "Am I talking to a real person?". The response should be: "I'm an AI receptionist. How can I help you?" - then continue helping. Agents must NEVER claim to be human.
 
@@ -308,3 +320,22 @@ Standalone assistants for client demos, separate from the production squad archi
 - Demo-specific firm configuration
 
 See `prompts/demo/README.md` for full documentation.
+
+---
+
+## Self-Improving Agent Architecture
+
+Documentation for building continuously improving voice agents that learn from production feedback.
+
+**Location:** `docs/self-improving-agent-architecture.md`
+
+**Key Concepts:**
+- Automated failure analysis from Cekura evals
+- LLM-as-Judge for explainable scoring
+- Success pattern retrieval (few-shot from good calls)
+- A/B testing with auto-promotion
+- Optional DSPy integration for automated prompt optimization
+
+**Based on:** OpenAI Cookbook, Stanford DSPy, Databricks/Moody's production case studies, and voice AI lessons from Agora.
+
+See the full document for implementation phases, database schemas, and best practices.

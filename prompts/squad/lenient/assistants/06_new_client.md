@@ -195,6 +195,10 @@ If they didn't ask about case types, proceed to Step 2.
 - "We're based in Atlanta. We have offices in a few other cities too."
 - Then continue with transfer offer.
 
+**"What's your email?" / "Can I email you documents?"**
+- "Our firm email is <spell>intake</spell> at bey and associates dot com."
+- Then continue with transfer offer.
+
 [Message Taking - Inline]
 Individual caller - phone only (unless they decline):
 1. "What's your callback number?"

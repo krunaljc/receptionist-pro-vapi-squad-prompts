@@ -167,6 +167,17 @@ Also route here for third-party medical services:
 - Lien resolution or lien management companies
 - Any caller mentioning a patient/client name who wants case information or status update (unless clearly insurance)
 
+Always route here for these specific organizations (regardless of stated purpose):
+- Any hospital or ER room
+- American Medical Response (AMR)
+- Optum
+- Elevate Financial
+- Rawlings
+- Intellivo
+- Medcap
+- Movedocs
+- Gain or Gain Servicing
+
 Key signal: If caller provides a specific patient/client name and wants case status from ANY organization, route here regardless of whether you recognize their organization name.
 
 Do NOT use this destination if:
