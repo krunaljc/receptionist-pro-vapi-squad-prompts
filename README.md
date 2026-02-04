@@ -300,6 +300,8 @@ Analyzes new client firm SOPs against current agent capabilities to produce a st
 - [ ] Fallback line → customer success transfer (verify transfer_call invoked within 5s of handoff)
 - [ ] Case status inquiry → offers case manager transfer (NOT internal status code)
 - [ ] Prior contact mention ("I left a message") → proactive customer success offer
+- [ ] Insurance adjuster out-of-scope question (permissions, legal determinations) → case manager redirect
+- [ ] Medical provider with vague purpose ("mutual client") → neutral "How can I help you?" (no assumed treatment coordination)
 
 ---
 

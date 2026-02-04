@@ -4,6 +4,56 @@ All notable changes to the VAPI Squad Prompts are documented in this file.
 
 ---
 
+## [2026-02-03] - Fix Medical Provider Agent Assuming "Treatment Coordination"
+
+### Prompt Priming Fix
+
+**File Changed:** `prompts/squad/lenient/assistants/05_medical_provider.md`
+
+**Problem:** After case lookup, the Medical Provider agent says "How can I help you with treatment coordination?" even though the caller never mentioned treatment coordination. The caller only said "I'm calling in regards to a mutual client that we've treated."
+
+**Root Cause:** Two lines in the prompt primed the model to assume "treatment coordination" as the caller's purpose:
+1. Identity line said "helping a medical provider get case information about a patient" — narrowed assumed purpose
+2. Style line said "Medical providers need information to coordinate patient care" — directly injected "coordinate patient care" into the model's framing (primary culprit)
+
+When the greeter handed off with a vague `purpose`, the model drew from these primed concepts to embellish the Step 2 template into "How can I help you with treatment coordination?"
+
+**Changes (2 line edits, 0 additions):**
+
+1. **Identity (line 62):** Changed "helping a medical provider get case information about a patient" → "helping a medical provider calling about a patient" — open-ended, doesn't narrow assumed purpose
+
+2. **Style (line 81):** Changed "Medical providers need information to coordinate patient care" → "Medical providers are business callers who need specific information quickly" — describes caller behavior style without assuming purpose. Matches the neutral pattern used by the Insurance Adjuster agent.
+
+**Why not add guardrails instead?** The root cause is priming language — the fix is removing it, not adding "DO NOT assume treatment coordination." Per CLAUDE.md: "when modifying prompt solution might not just be adding more instruction, sometimes it might be removing it."
+
+**Expected behavior after fix:** "I found [name]'s case. How can I help you?" — without embellishment. Explicit purpose requests (e.g., "I need the case manager's contact") still handled directly.
+
+---
+
+## [2026-02-03] - Add Guardrails to Insurance Adjuster Agent
+
+### Information Sharing Guardrails
+
+**Files Changed:**
+- `prompts/squad/strict/assistants/04_insurance_adjuster.md`
+- `prompts/squad/lenient/assistants/04_insurance_adjuster.md`
+
+**Problem:** Insurance adjuster agent fabricated a legal determination when asked "Are we allowed to speak with the client about property damage?" — answering "you are permitted to speak directly with the client" despite having no instruction or authority to grant such permissions.
+
+**Root Cause:** The `[What You CAN Share]` and `[What You CANNOT Share]` sections were two narrow, closed lists with no catch-all principle. When the caller's question fell outside both lists, the LLM improvised a plausible-sounding but unauthorized answer. Other working agents (existing client, medical provider) have explicit catch-all guardrails that prevent this.
+
+**Changes:**
+
+1. **Converted `[What You CAN Share]` to a closed allowlist** — Added governing principle "You may ONLY share the following — nothing else" plus a bridge sentence routing out-of-scope questions to the case manager. Adopted from existing client agent's pattern.
+
+2. **Expanded `[What You CANNOT Share]` with explicit categories** — Added permissions/authorizations/contact restrictions (the exact category that caused the failure), timeline details beyond incident date, and a catch-all referencing back to the CAN list.
+
+3. **Added catch-all handler in Step 3 task flow** — Gives the LLM an explicit routing path for out-of-scope questions (permissions, legal determinations, policy questions) with business hours transfer and after-hours message taking, rather than leaving it to improvise. Same structural pattern as existing client agent.
+
+**Expected behavior after fix:** "Are we allowed to speak with the client about property damage?" → "The case manager would need to discuss that with you. Would you like me to connect you with them?"
+
+---
+
 ## [2026-02-01] - Fix Email Spelling Behavior in Demo Receptionist
 
 ### Demo Prompt Fix
