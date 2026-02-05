@@ -4,6 +4,87 @@ All notable changes to the VAPI Squad Prompts are documented in this file.
 
 ---
 
+## [2026-02-04] - Generalize Staff Role Handling in Existing Client Agent
+
+### Prompt Enhancement: Dynamic Staff Role Support
+
+**File Changed:** `prompts/squad/strict/assistants/03_existing_client.md`
+
+**Problem:** Existing client agent was hardcoded to only announce "case manager" when offering transfers. However, the backend's `search_case_details` response returns a generic `staff` object with a `role` field that can be any role (case_manager, lawyer, paralegal, etc.). If backend returned `"role": "lawyer"`, agent would incorrectly say "your case manager."
+
+**Root Cause:** Prompt had hardcoded "case_manager" terminology throughout - in goals, task steps, data extraction, transfer phrasing, message taking, and error handling.
+
+**Solution:** Generalized all case_manager-specific logic to use dynamic staff terminology:
+
+1. **Data extraction changed:** Now extracts `staff.name` and `staff.role` instead of `case_manager`
+2. **Role-aware phrasing:** Uses "your [staff_role] [staff_name]" dynamically
+   - Example: "Your case manager Khoi Pham can give you a detailed update."
+   - Example: "Your lawyer Sarah Johnson can give you a detailed update."
+3. **Transfer phrasing:** Uses just the name when offering transfer (no role prefix)
+   - Example: "Let me get you over to Khoi Pham. Is that alright?"
+4. **N/A handling:** When staff is missing/null, uses "your case team" phrasing
+5. **Removed "Handling lawyer requests" section:** No longer needed since all roles are handled dynamically
+
+**Key Changes:**
+
+| Section | Before | After |
+|---------|--------|-------|
+| Goals | "transfer to case manager" | "transfer to assigned staff" |
+| Step 3 Extract | `case_manager` | `staff_name`, `staff_role` |
+| Status offer | "Your case manager [name]" | "Your [staff_role] [staff_name]" |
+| Transfer offer | "Let me get you over to [case_manager]" | "Let me get you over to [staff_name]" |
+| Contact info | "Your case manager is [name]" | "Your [staff_role] is [staff_name]" |
+| Fallback | "Your case manager would need..." | "[staff_name] would need..." |
+| Message taking | "What would you like me to tell [case_manager]?" | "What would you like me to tell [staff_name]?" |
+
+**Test Scenarios:**
+
+| Scenario | staff.role | staff.name | Expected Phrasing |
+|----------|------------|------------|-------------------|
+| Case manager assigned | case_manager | "Khoi Pham" | "Your case manager Khoi Pham..." |
+| Lawyer assigned | lawyer | "Sarah Johnson" | "Your lawyer Sarah Johnson..." |
+| Paralegal assigned | paralegal | "Mike Davis" | "Your paralegal Mike Davis..." |
+| No staff assigned | null | null | "Your case team..." |
+| Transfer offer | any | "Khoi Pham" | "Let me get you over to Khoi Pham" |
+
+---
+
+## [2026-02-04] - Existing Client Phase-Based Transfer (Strict Squad)
+
+### Prompt Enhancement: Backend-Driven Routing for Existing Clients
+
+**File Changed:** `prompts/squad/strict/assistants/03_existing_client.md`
+
+**Problem:** When `case_manager` is "N/A" in `search_case_details` response, the agent had no value for transfer and fell back to `customer_success` per the Fallback Principle. Backend now handles routing automatically.
+
+**Root Cause:** Prompt instructed agent to extract `staff_id` from search results and pass to `transfer_call`. With N/A case manager, agent had no `staff_id` and couldn't complete transfer.
+
+**Solution:** Updated prompt for backend-driven routing:
+
+1. **Tool renamed:** `transfer_call` → `transfer_call_strict` throughout
+2. **Extraction changed:** Now extracts `case_unique_id` instead of `staff_id`
+3. **Transfer params changed:** `caller_type="existing_client", firm_id={{firm_id}}, case_unique_id=[case_unique_id]` (no staff_id)
+4. **Conditional phrasing:** Uses "your case team" when case_manager is N/A (vs. specific name)
+5. **Always transfer:** Explicit instruction to transfer even with N/A case_manager - backend routes appropriately
+
+**Key Changes:**
+
+| Section | Before | After |
+|---------|--------|-------|
+| Step 3 Extract | `case_manager, staff_id, case_status` | `case_manager, case_unique_id, case_status` |
+| Transfer params | `staff_id=[staff_id]` | `case_unique_id=[case_unique_id]` |
+| N/A phrasing | (none - fell back) | "your case team" |
+| Tool name | `transfer_call` | `transfer_call_strict` |
+
+**Test Scenarios:**
+
+| Scenario | Expected Phrase | Transfer Params |
+|----------|-----------------|-----------------|
+| CM available | "Let me get you over to [name]" | `caller_type="existing_client", firm_id=X, case_unique_id=Y` |
+| CM is N/A | "Let me get you to your case team" | `caller_type="existing_client", firm_id=X, case_unique_id=Y` |
+
+---
+
 ## [2026-02-01] - Fix Email Spelling Behavior in Demo Receptionist
 
 ### Demo Prompt Fix

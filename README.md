@@ -290,7 +290,8 @@ Analyzes new client firm SOPs against current agent capabilities to produce a st
 
 - [ ] New client → intake transfer
 - [ ] Insurance adjuster → case lookup → info provision
-- [ ] Existing client → case manager transfer
+- [ ] Existing client → assigned staff transfer (case manager, lawyer, paralegal, etc.)
+- [ ] Existing client with N/A staff → "your case team" phrasing + transfer_call_strict with case_unique_id
 - [ ] Pre-identified client → direct service (standalone)
 - [ ] Staff request → direct transfer
 - [ ] Medical + Billing → Vendor routing
@@ -298,7 +299,7 @@ Analyzes new client firm SOPs against current agent capabilities to produce a st
 - [ ] After-hours handling
 - [ ] Frustrated caller → priority escalation
 - [ ] Fallback line → customer success transfer (verify transfer_call invoked within 5s of handoff)
-- [ ] Case status inquiry → offers case manager transfer (NOT internal status code)
+- [ ] Case status inquiry → offers assigned staff transfer (NOT internal status code)
 - [ ] Prior contact mention ("I left a message") → proactive customer success offer
 
 ---
