@@ -195,13 +195,13 @@ DO NOT PROCEED until this step completes.
 - If unsure whether they're done, ask: "Is that the complete name?"
 
 If client_name IS provided from greeter:
-- Call search_case_details IMMEDIATELY with client_name=[client name], firm_id={{firm_id}}.
+- Call search_case_details IMMEDIATELY with client_name=[client name], firm_id={{firm_id}}, caller_type="insurer", caller_org={{organization_name}}.
 - Wait for tool results. Do not speak.
 
 If client_name NOT provided:
 - "Which client are you calling about?"
 - Wait for the customer's response.
-- Call search_case_details IMMEDIATELY with client_name=[provided name], firm_id={{firm_id}}.
+- Call search_case_details IMMEDIATELY with client_name=[provided name], firm_id={{firm_id}}, caller_type="insurer", caller_org={{organization_name}}.
 - Wait for tool results. Do not speak.
 
 If you find yourself about to speak without search results, STOP and call the tool.

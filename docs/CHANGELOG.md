@@ -4,6 +4,70 @@ All notable changes to the VAPI Squad Prompts are documented in this file.
 
 ---
 
+## [2026-02-05] - Add caller_type and caller_org to Insurance Adjuster search_case_details
+
+### Insurance Adjuster Tool Parameter Update
+
+**Files Changed:**
+- `prompts/squad/strict/assistants/04_insurance_adjuster.md`
+
+**Problem:** The `search_case_details` tool now requires two mandatory parameters for insurance callers: `caller_type="insurer"` and `caller_org={{organization_name}}`. These were not specified in the insurance adjuster prompt.
+
+**Solution:** Added the new parameters to both call syntax locations (lines 198 and 204):
+- When client_name is provided from greeter
+- When client_name is collected from caller
+
+**Why Only 2 Edits:** The prompt references `search_case_details` in 13 places, but only 2 locations specify the actual call syntax with parameters. Other references are conceptual rules, verification gates, or examples without full syntax. The model learns by example from the explicit call patterns.
+
+---
+
+## [2026-02-05] - Add Closed-Allowlist Guardrails to All Case-Sharing Agents
+
+### Information Sharing Guardrails Rollout
+
+**Files Changed:**
+- `prompts/squad/strict/assistants/03_existing_client.md`
+- `prompts/squad/lenient/assistants/03_existing_client.md`
+- `prompts/squad/strict/assistants/04_insurance_adjuster.md`
+- `prompts/squad/lenient/assistants/04_insurance_adjuster.md`
+- `prompts/squad/strict/assistants/12_legal_system.md`
+- `prompts/squad/lenient/assistants/12_legal_system.md`
+- `prompts/squad/strict/standalone/pre_identified_caller/system_prompt.md`
+- `prompts/squad/lenient/standalone/pre_identified_caller/system_prompt.md`
+- `prompts/squad/lenient/assistants/05_medical_provider.md`
+
+**Problem:** Insurance adjuster agent fabricated a legal determination when asked "Are we allowed to speak with the client about property damage?" — answering "you are permitted to speak directly with the client" despite having no instruction or authority to grant such permissions.
+
+**Root Cause:** The `[What You CAN Share]` and `[What You CANNOT Share]` sections were narrow, closed lists with no catch-all principle. When a caller's question fell outside both lists, the LLM improvised a plausible-sounding but unauthorized answer. The same vulnerability existed in all agents that share case information.
+
+**Solution:** Applied a three-part guardrail pattern to all case-sharing agents:
+
+1. **CAN list → closed allowlist:** Added governing principle "You may ONLY share the following — nothing else" + bridge sentence routing out-of-scope questions to the appropriate staff member.
+
+2. **CANNOT list → expanded with catch-all:** Added two new categories:
+   - "Permissions, authorizations, or contact restrictions regarding clients/the caller's case"
+   - "Any legal determination, policy decision, or guidance not explicitly listed in [What You CAN Share]"
+
+3. **Step N catch-all handler:** Added or expanded existing handlers with explicit business-hours/after-hours routing and transfer_call mechanics.
+
+**Agent-Specific Variations:**
+
+| Agent | Redirect Phrase | Transfer Type |
+|-------|-----------------|---------------|
+| Existing Client | "Your case manager/staff_name/case team would need to discuss that with you." | transfer to staff |
+| Insurance Adjuster | "The case manager would need to discuss that with you." | transfer to insurance dept |
+| Legal System | "The attorney on the case would need to discuss that with you." | message taking (no transfer) |
+| Pre-Identified Caller | "Your case manager would need to discuss that with you." | transfer to staff |
+| Medical Provider | "The case manager would need to discuss that with you." | transfer to staff |
+
+**Excluded Files:**
+- `prompts/squad/strict/assistants/05_medical_provider.md` — fax-redirect only, shares zero case info
+- Demo assistants — different firm, different architecture
+
+**Expected Behavior After Fix:** Out-of-scope questions like "Are we allowed to speak with the client about property damage?" or "Can I get a copy of my medical records?" now produce the appropriate redirect phrase followed by a transfer offer (during business hours) or message taking (after hours).
+
+---
+
 ## [2026-02-04] - Generalize Staff Role Handling in Existing Client Agent
 
 ### Prompt Enhancement: Dynamic Staff Role Support
