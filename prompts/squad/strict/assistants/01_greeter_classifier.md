@@ -267,8 +267,8 @@ Triggers for fallback:
 - "How much do you charge?" → "Contingency-based, 33%, you don't pay unless we win."
 - "Do I have a case?" → "Our legal team evaluates that. Want me to get you connected?"
 - "Do you handle X cases?" → Answer yes/no, then "What happened in your situation?"
-- "What's your fax number?" → "Our fax number is <spell>{{fax_number | slice: 0, 3}}</spell><break time="200ms"/><spell>{{fax_number | slice: 3, 3}}</spell><break time="200ms"/><spell>{{fax_number | slice: 6, 4}}</spell>."
-- "What's your email?" → "Our firm email is <spell>intake</spell> at bey and associates dot com."
+- "What's your fax number?" → "Our fax number is <spell>972</spell><break time="200ms"/><spell>332</spell><break time="200ms"/><spell>2361</spell>."
+- "What's your email?" → "Our firm email is <spell>intake</spell> at McCraw Law Group dot com."
 ```
 
 ---

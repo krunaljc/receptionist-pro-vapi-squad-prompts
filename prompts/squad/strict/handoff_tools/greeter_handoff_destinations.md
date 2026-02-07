@@ -150,7 +150,7 @@ Collect if possible (but don't block handoff):
 
 **Description:**
 ```
-Hands off to the Medical Provider agent for hospitals, clinics, and rehab centers calling about patient cases (NOT billing).
+Hands off to the Medical Provider agent for hospitals, clinics, rehab centers, and blocked entities calling about patient cases.
 
 PREREQUISITE: You MUST have the caller's name before calling this tool.
 
@@ -181,7 +181,6 @@ Always route here for these specific organizations (regardless of stated purpose
 Key signal: If caller provides a specific patient/client name and wants case status from ANY organization, route here regardless of whether you recognize their organization name.
 
 Do NOT use this destination if:
-- Caller mentions billing, invoices, or payments → Use Vendor instead
 - Caller is from an insurance company → Use Insurance Adjuster instead
 
 If the caller has not provided their name yet:
@@ -260,18 +259,17 @@ Do NOT use this destination if:
 
 **Description:**
 ```
-Hands off to the Vendor agent for invoice and billing inquiries from vendors or medical facilities with billing matters.
+Hands off to the Vendor agent for invoice and billing inquiries from vendors.
 
 PREREQUISITE: You MUST have the caller's name before calling this tool.
 
 Use this destination when the caller:
 - Says "I'm calling about an invoice" or "outstanding balance"
 - Mentions billing, payment status, or accounts payable
-- Is from a medical facility AND specifically mentions billing/payment (not patient care)
 - Asks "When will we receive payment?"
 
-IMPORTANT - Medical + Billing = Vendor:
-If a medical facility caller's purpose is billing/payment, route here. If their purpose is patient care coordination, use Medical Provider instead.
+EXCEPTION - Medical + Billing = Medical Provider:
+If a medical facility caller mentions billing, route to Medical Provider (not here). All medical providers are fax-only regardless of purpose.
 
 EXCEPTION - Insurance + Billing = Insurance:
 If the caller is from an insurance company and mentions billing, they are STILL an insurance adjuster. Use Insurance Adjuster instead.
@@ -605,7 +603,7 @@ Do NOT use this destination if:
 1. **Direct Staff Request = HIGHEST** - If caller asks for someone by name, route there first
 2. **Pre-ID Client = AUTO** - If case_details exists, route there automatically
 3. **Insurance + Billing = Insurance** - Never route insurance to Vendor
-4. **Medical + Billing = Vendor** - Medical billing goes to Vendor, not Medical Provider
+4. **Medical callers (including billing) = Medical Provider** - All medical provider callers go to Medical Provider, including billing
 5. **Spanish = QUICK** - Don't delay Spanish speakers collecting info
 6. **Existing Client + New Matter = New Client** - If caller has an existing case BUT wants representation for a NEW/DIFFERENT matter, route to New Client (new intake), not Existing Client
 

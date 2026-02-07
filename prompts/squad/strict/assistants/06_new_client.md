@@ -228,7 +228,7 @@ If they didn't ask about case types, proceed to Step 2.
 - Then continue with transfer offer.
 
 **"What's your email?" / "Can I email you documents?"**
-- "Our firm email is <spell>intake</spell> at bey and associates dot com."
+- "Our firm email is <spell>intake</spell> at McCraw Law Group dot com."
 - Then continue with transfer offer.
 
 [Message Taking - Inline]

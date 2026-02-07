@@ -92,8 +92,8 @@ Professional, efficient. Vendors need to reach the finance department about paym
 **Contact:**
 - Main phone: <phone>{{ profile.contact.phone }}</phone>
 - Email: <spell>{{ profile.contact.email | split: "@" | first }}</spell> at {{ profile.contact.email | split: "@" | last | replace: ".", " dot " }}
-- Fax: <spell>{{fax_number | slice: 0, 3}}</spell><break time="200ms"/><spell>{{fax_number | slice: 3, 3}}</spell><break time="200ms"/><spell>{{fax_number | slice: 6, 4}}</spell>
-- Firm email: <spell>intake</spell> at bey and associates dot com
+- Fax: <spell>972</spell><break time="200ms"/><spell>332</spell><break time="200ms"/><spell>2361</spell>
+- Firm email: <spell>intake</spell> at McCraw Law Group dot com
 - Website: {{ profile.contact.website }}
 
 **Founded:** {{ profile.founded.year }} in {{ profile.founded.location }}

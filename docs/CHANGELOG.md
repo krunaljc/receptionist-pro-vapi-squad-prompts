@@ -4,6 +4,283 @@ All notable changes to the VAPI Squad Prompts are documented in this file.
 
 ---
 
+## [2026-02-06] - Direct Staff Request: Add Phone Restriction Guardrails (Agent 08)
+
+### Direct Staff Request: Block Phone Sharing from Directory Results
+
+**File Changed:** `prompts/squad/strict/assistants/08_direct_staff_request.md`
+
+**Problem:** Agent 08 (Direct Staff Request) actively uses `staff_directory_lookup` results in conversation but lacked phone restriction guardrails. If a caller asked "Can you just give me their direct number?" nothing explicitly prevented the LLM from reading phone data out of tool results.
+
+**Root Cause:** Agent was originally built as transfer-only with no explicit contact info scenarios. Phone/email sharing was never instructed, but no guardrail existed to block it when callers asked. Every other agent with staff contact data access (03, 04, 12, standalone) already had explicit [What You CAN Share] / [What You CANNOT Share] sections — Agent 08 was the last gap.
+
+**Solution:**
+
+1. **Added response guideline** for phone restriction:
+   - "Only provide staff email when explicitly asked — never provide staff phone numbers"
+
+2. **Added contact info scenarios** in Step 3 (single match):
+   - Email request → provide email from directory results using `<spell>` formatting
+   - Phone request → deflect to transfer offer: "I can get you over to [staff_name] directly. Would you like me to connect you?"
+   - Phone decline → offer email as fallback
+
+3. **Added [What You CAN Share] / [What You CANNOT Share] sections:**
+   - CAN share: name, role (disambiguation), email (when asked), transfer
+   - CANNOT share: phone numbers, any other contact details from directory results
+   - Deflection: "I can get you over to them directly, or take a message."
+
+**What stays unchanged:**
+- Step 0 (non-name detection) — no change
+- Step 1 (name validation) — no change
+- Step 2 (directory search) — no change
+- Step 3 (count=0, count>1 flows) — no change
+- Step 4 (transfer or message) — no change
+- Spelling protocol — no change
+- Tool call rules, silence rules — no change
+- Error handling — no change
+- Message taking flow — no change
+- Voice formatting — no change
+
+**Cross-agent audit result:** All agents with staff contact data access now have explicit phone-blocking guardrails. No agent in the strict squad can share staff phone numbers from any data source.
+
+---
+
+## [2026-02-06] - Cross-Agent Audit: Restrict Phone Sharing + Generalize Staff Roles (Existing Client & Pre-ID Caller)
+
+### Existing Client + Pre-Identified Caller: No Phone Numbers, Generalized Role Mapping
+
+**Files Changed:**
+- `prompts/squad/strict/assistants/03_existing_client.md`
+- `prompts/squad/strict/standalone/pre_identified_caller/system_prompt.md`
+
+**Problem:** Existing client and pre-identified caller agents shared staff phone numbers directly and used hardcoded role labels. This was inconsistent with the restricted data access patterns already applied to insurance adjuster (04) and legal system (12) agents.
+
+**Root Cause:** Two issues: (1) No phone restriction policy existed for client-facing agents — they provided staff phone numbers on request. (2) Role display mapping was not generalized — existing client exposed raw roles (paralegal, lawyer) and pre-ID caller hardcoded "case manager" regardless of actual staff role.
+
+**Solution:**
+
+1. **Restricted phone number sharing** across both agents:
+   - Phone number requests now deflected to transfer offer: "I can get you over to [staff_name] directly. Would you like me to connect you?"
+   - Email provided when explicitly asked (never volunteered)
+   - [What You CAN Share] updated: removed phone, added "transfer to assigned staff"
+   - [What You CANNOT Share] updated: "Staff phone numbers (offer email or transfer instead)" added as first item
+
+2. **Generalized staff role handling** (existing client — 03):
+   - Old mapping: case_manager → "case manager", lawyer → "lawyer", paralegal → "paralegal"
+   - New mapping: lawyer/attorney → "attorney"; all others → "case manager"
+   - Status examples updated: "Your lawyer" → "Your attorney"
+   - Uses `[display_role]` throughout Step 4 scenarios
+
+3. **Generalized staff role handling** (pre-ID caller — standalone):
+   - Removed hardcoded "Case Manager" labels from pre-loaded case information
+   - Added `Staff Role: {{case.staff.role}}` and role display mapping section
+   - Replaced all hardcoded "case manager" in scenario headers and deflection text with `[display_role]`
+   - Removed `Case Manager Phone: {{case.staff.phone}}` from pre-loaded context entirely
+
+**What stays unchanged (both agents):**
+- DOB verification flow — no change
+- Transfer mechanics (caller_type, firm_id, case_unique_id routing) — no change
+- Message taking flow — no change
+- Spelling protocol (existing client) — no change
+- Error handling, misclassification handling — no change
+- Voice formatting — no change
+
+**Cross-agent audit result:** All 12 strict squad agents + standalone pre-ID caller now consistent. No agent shares staff phone numbers. Role display mapping standardized: attorney/case manager only.
+
+---
+
+## [2026-02-06] - Legal System: Restrict Data Access, Generalize Staff Roles, Add DOB Verification
+
+### Legal System: Limit Shared Data to Status, Email, Transfer + Add DOB Gate
+
+**File Changed:** `prompts/squad/strict/assistants/12_legal_system.md`
+
+**Problem:** Legal system agent shared too much data (case manager phone numbers, attorney names, general contact info) freely across 6 scenario types, lacked DOB verification before case lookup, and hardcoded staff roles instead of reading them from search results.
+
+**Root Cause:** Three issues: (1) No verification gate — case data was shared on name lookup alone with no identity check. (2) Information-sharing was open-ended across 6 scenario types (defense attorney, court reporter, process server, court clerk, general inquiry, out-of-scope), all eventually routing to customer_success but sharing different data along the way. (3) Staff roles were not generalized — raw role values like "paralegal" or "legal_assistant" were exposed instead of mapped to display roles.
+
+**Solution:**
+
+1. **Added DOB verification before case search** (same pattern as existing client agent):
+   - New Step 2: Collect client name if not provided
+   - New Step 3: Collect date of birth (BLOCKING) before search
+   - Search now includes `client_dob` parameter alongside `client_name` and `firm_id`
+   - No `caller_org` parameter (legal system callers aren't org-affiliated like insurers)
+
+2. **Restricted data access** on successful lookup to three capabilities only:
+   - Case status (translated to plain English — never raw codes)
+   - Staff email (only when explicitly asked — never volunteered)
+   - Transfer to assigned staff
+   - Everything else deflected: "The [display_role] would need to discuss that with you."
+
+3. **Generalized staff role handling** with display mapping:
+   - lawyer or attorney → displayed as "attorney"
+   - case_manager, paralegal, legal_assistant, or any other role → displayed as "case manager"
+   - If staff missing/null → "the assigned team member"
+
+4. **Specific items now deflected** (previously shared freely):
+   - Staff phone numbers (offer email or transfer instead)
+   - Attorney name/contact (unless they are the assigned staff)
+   - Incident date, filing date, any case dates
+   - Payment status details (explicitly separated from case status)
+   - Settlement amounts, dates, monetary details
+
+5. **Collapsed 6 scenario types** into unified restricted model:
+   - All transfer scenarios (defense attorney, court reporter, process server, court clerk, general inquiry) now use single transfer flow with staff_id routing
+   - Transfer uses `caller_type="legal_system"` with staff_id when available, falls back to `caller_type="customer_success"`
+
+**What stays unchanged:**
+- Step 1 (Understand the Need — purpose categories) — no change
+- Step 5 count=0, count>1 flows (spelling protocol, disambiguation) — no change (only step numbers shifted)
+- Spelling protocol — no change
+- Tool error handling — no change
+- Message taking flow (except team reference now uses staff_name when available) — no change
+- Misclassification handling — no change
+- Error handling — no change
+- Voice formatting — no change
+
+---
+
+## [2026-02-06] - Insurance Adjuster: Restrict Data Access + Generalize Staff Roles
+
+### Insurance Adjuster: Limit Shared Data to Status, Email, Transfer
+
+**File Changed:** `prompts/squad/strict/assistants/04_insurance_adjuster.md`
+
+**Problem:** Insurance adjuster shared the widest range of case data — case manager name + phone + email, case status, payment status, dates, attorney contact — and hardcoded "case_manager" as the only staff role. The assigned staff may actually be a paralegal, legal assistant, or attorney.
+
+**Root Cause:** Two issues: (1) Information-sharing scope was never restricted for insurers — they received the same access as internal callers. (2) Staff role was hardcoded to "case_manager" instead of reading the actual role from search results.
+
+**Solution:**
+
+1. **Restricted data access** on successful lookup to three capabilities only:
+   - Case status (translated to plain English — never raw codes)
+   - Staff email (only when explicitly asked — never volunteered)
+   - Transfer to assigned staff
+   - Everything else deflected: "The [display_role] would need to discuss that with you."
+
+2. **Generalized staff role handling** with display mapping:
+   - lawyer or attorney → displayed as "attorney"
+   - case_manager, paralegal, legal_assistant, or any other role → displayed as "case manager"
+   - If staff missing/null → "the assigned team member"
+
+3. **Specific items now deflected** (previously shared freely):
+   - Staff phone numbers (offer email or transfer instead)
+   - Attorney name/contact (unless they are the assigned staff)
+   - Incident date, filing date, any case dates
+   - Payment status details (explicitly separated from case status)
+   - Settlement amounts, dates, monetary details
+
+**What stays unchanged:**
+- Step 1 (search flow) — no change
+- Step 2 (count=0, count>1 flows) — no change
+- Tool error handling — no change
+- Spelling protocol — no change
+- Message taking flow (except team reference now uses staff_name when available) — no change
+- Frustrated caller escalation — no change
+- Misclassification handling — no change
+
+---
+
+## [2026-02-06] - Insurance Adjuster: Tool Error Fallback to Message-Taking
+
+### Insurance Adjuster: Handle search_case_details Tool-Level Errors
+
+**File Changed:** `prompts/squad/strict/assistants/04_insurance_adjuster.md`
+
+**Problem:** When `search_case_details` returns a tool-level error (no structured response), the agent had no explicit handling. It fell through to the `[Fallback Principle]` which transfers to customer_success — an unpredictable path when the backend is simply experiencing an error (e.g., org allowlist check failure).
+
+**Root Cause:** Only two response scenarios were handled (count=1 success, count=0 not found). The third scenario — tool call failure with no structured response — was unhandled, causing fallthrough to the general-purpose customer_success transfer.
+
+**Solution:** Added explicit tool error handling between Step 1 (search) and Step 2 (evaluate results):
+- Agent acknowledges the issue naturally: "I'm having trouble pulling up that file."
+- Routes to message-taking immediately — no retry, no transfer
+- Message-taking is a safer, more predictable path than customer_success transfer for a backend error
+
+**What stays unchanged:**
+- Success flow (count=1) — no change
+- Not-found flow (count=0) — spelling protocol, re-search, hours-based branching — no change
+- Multiple matches (count>1) — disambiguation flow — no change
+- All other sections — no change
+
+---
+
+## [2026-02-06] - Simplify Medical Provider Agent to Fax-Only Gatekeeper
+
+### Medical Provider: Remove Inherited Information-Sharing Patterns
+
+**File Changed:** `prompts/squad/strict/assistants/05_medical_provider.md`
+
+**Problem:** Medical provider agent was built from the same template as information-sharing agents (insurance adjuster), inheriting message taking, general firm info sharing, transfer offers, and hours-based branching — all inappropriate for a fax-only gatekeeper. SOP mandates all medical providers, hospitals, ERs, and blocked entities are fax-only.
+
+**Root Cause:** Template inheritance. The agent had paths (message taking, offer-to-transfer, phone/email provision) that contradicted its single purpose: provide the fax number.
+
+**Solution — primarily subtraction:**
+
+1. **Role description** — Added "blocked entities" to scope; changed "redirect to fax" → "provide fax number"
+2. **Background Data** — Removed: firm email, intake email, website, founded, services. Kept: fax (marked PRIMARY), locations, main phone. Added instruction that fax is the only contact for case matters.
+3. **Goals** — Reduced from 3 to 2. Removed "take a message if required." Fax IS the message channel.
+4. **Response Guidelines** — "Speak with someone → offer transfer" became "explain fax policy, do NOT offer transfer." "Provide phone/email" became "redirect to fax."
+5. **[Task] section** — Replaced 4-step branching (acknowledge, follow-up, message taking, close) with 3-step funnel (acknowledge + provide fax proactively, handle follow-up scenarios, close). Added Blocked Entities awareness block.
+6. **[What You CAN Share]** — Removed website/email. Fax is primary; basic firm info only if caller asks non-case question.
+7. **[Message Taking - Inline]** — Entire section deleted. No message taking for this agent.
+8. **Error Handling** — Transfer failure fallback changed from "take a message" to fax redirect.
+
+### Greeter Handoff Destinations: Route All Medical Callers to Medical Provider
+
+**File Changed:** `prompts/squad/strict/handoff_tools/greeter_handoff_destinations.md`
+
+1. **Medical Provider description** — Removed "(NOT billing)" restriction. All medical callers (including billing) now route to Medical Provider.
+2. **Medical Provider exclusion rules** — Removed "billing → Vendor" exclusion. Only exclusion remaining: insurance callers → Insurance Adjuster.
+3. **Priority Override Rule 4** — Changed from "Medical + Billing = Vendor" to "Medical callers (including billing) = Medical Provider."
+4. **Vendor description** — Removed medical facility billing routing. Added exception: "Medical + Billing = Medical Provider."
+
+### README and Testing Checklist Updates
+
+**File Changed:** `README.md`
+
+- Updated strict variant description: "fax redirect" → "fax-only gatekeeper (no message taking, no transfers, no general info)"
+- Updated testing checklist: replaced "Medical + Billing → Vendor routing" with medical provider fax-only test cases
+
+---
+
+## [2026-02-06] - Strict Squad: Port Missing Lenient Patterns + Firm Contact Update
+
+### Existing Client: Port Production-Proven Patterns from Lenient
+
+**File Changed:** `prompts/squad/strict/assistants/03_existing_client.md`
+
+**Gap 1 — "Handling lawyer requests" section (NEW):**
+Callers frequently ask for "the lawyer" when their assigned staff is a case manager. Lenient has a battle-tested instruction to stay with assigned staff routing. Without this, the strict agent's staff role generalization could cause it to search for a lawyer instead of routing through the assigned staff.
+
+Added after Message Taking section: If caller asks for "the lawyer"/"the attorney" but assigned staff is a different role, stay with assigned staff routing — they coordinate with attorneys internally.
+
+**Gap 2 — Purpose-clear vs purpose-vague branching (Step 3, count=1):**
+When a caller already stated their purpose to the greeter, strict was always asking "How can I help you?" — making callers repeat themselves. Lenient distinguishes between clear and vague purpose from handoff context.
+
+Added branching: If purpose was clear from handoff → proceed directly. If purpose was vague → ask "How can I help you?"
+
+### Firm Contact Info Update (All Strict Squad Files)
+
+**Fax number** — Replaced `{{fax_number | slice:...}}` template variable with hardcoded `972-332-2361` across 5 files:
+- `01_greeter_classifier.md`
+- `04_insurance_adjuster.md`
+- `05_medical_provider.md`
+- `07_vendor.md`
+- `12_legal_system.md`
+
+**Email domain** — Updated from `bey and associates dot com` to `McCraw Law Group dot com` across 8 files (9 locations):
+- `01_greeter_classifier.md`
+- `03_existing_client.md`
+- `04_insurance_adjuster.md` (2 locations)
+- `05_medical_provider.md`
+- `06_new_client.md`
+- `07_vendor.md`
+- `12_legal_system.md`
+- `standalone/pre_identified_caller/system_prompt.md`
+
+---
+
 ## [2026-02-05] - Add caller_type and caller_org to Insurance Adjuster search_case_details
 
 ### Insurance Adjuster Tool Parameter Update

@@ -49,11 +49,14 @@ The **lenient** variant provides open information sharing with minimal verificat
 - Streamlined call flow
 - 11 active agents + 2 WIP
 
-### Strict (Future)
+### Strict (In Development)
 
-The **strict** variant will require thorough caller verification before sharing any information.
+The **strict** variant requires thorough caller verification (e.g., DOB) before sharing any information. Currently being prepared for production with McCraw Law Group.
 
-> **Note:** The strict variant currently contains a copy of lenient as a base. Future modifications will add verification requirements.
+- DOB verification for existing clients before case lookup
+- Medical provider → fax-only gatekeeper (no message taking, no transfers, no general info)
+- Generalized staff role handling (case_manager, lawyer, paralegal)
+- Hardcoded firm contact: fax `972-332-2361`, email `intake@mccrawlawgroup.com`
 
 ---
 
@@ -290,17 +293,30 @@ Analyzes new client firm SOPs against current agent capabilities to produce a st
 
 - [ ] New client → intake transfer
 - [ ] Insurance adjuster → case lookup → info provision
+- [ ] Insurance adjuster → restricted data: only status, email, transfer (deflects phone/dates/payment)
+- [ ] Insurance adjuster → staff role mapping: paralegal/legal_assistant displayed as "case manager"
+- [ ] Insurance adjuster → search tool error → message taking (not customer_success transfer)
 - [ ] Existing client → assigned staff transfer (case manager, lawyer, paralegal, etc.)
 - [ ] Existing client with N/A staff → "your case team" phrasing + transfer_call_strict with case_unique_id
 - [ ] Pre-identified client → direct service (standalone)
 - [ ] Staff request → direct transfer
-- [ ] Medical + Billing → Vendor routing
+- [ ] Medical provider (including billing) → fax-only redirect
+- [ ] Medical blocked entities (AMR, Optum, etc.) → fax-only redirect
 - [ ] Misclassification → customer success escalation
 - [ ] After-hours handling
 - [ ] Frustrated caller → priority escalation
 - [ ] Fallback line → customer success transfer (verify transfer_call invoked within 5s of handoff)
 - [ ] Case status inquiry → offers assigned staff transfer (NOT internal status code)
 - [ ] Prior contact mention ("I left a message") → proactive customer success offer
+- [ ] Existing client → phone request deflected to transfer offer (never shares staff phone)
+- [ ] Existing client → staff role mapping: paralegal displayed as "case manager", lawyer as "attorney"
+- [ ] Pre-ID caller → phone request deflected to transfer offer (never shares staff phone)
+- [ ] Pre-ID caller → staff role mapping: generalized from hardcoded "case manager" using display_role
+- [ ] Legal system → DOB verification before case lookup
+- [ ] Legal system → restricted data: only status, email, transfer (deflects phone/dates/payment)
+- [ ] Legal system → staff role mapping: paralegal/legal_assistant displayed as "case manager"
+- [ ] Direct staff request → caller asks for phone number → deflected to transfer offer
+- [ ] Direct staff request → caller asks for email → email provided from directory results
 
 ---
 
