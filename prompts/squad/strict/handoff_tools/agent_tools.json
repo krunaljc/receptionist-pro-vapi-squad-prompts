@@ -108,10 +108,10 @@
       },
       "knowledgeBases": [
         {
-          "name": "Bey_and_associates_staff_directory",
+          "name": "McCraw_law_group_staff_directory",
           "provider": "google",
           "model": "gemini-2.0-flash",
-          "description": "Bey & Associates Staff Directory"
+          "description": "McCraw Law Group Staff Directory"
         }
       ]
     }

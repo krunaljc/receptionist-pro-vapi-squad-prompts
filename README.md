@@ -1,6 +1,6 @@
 # Receptionist Pro - VAPI Squad Agent
 
-AI receptionist system for Bey & Associates personal injury law firm. This repository contains prompt configurations for VAPI voice agents.
+AI receptionist system for personal injury law firms. Currently deployed for Bey & Associates (lenient) and McCraw Law Group (strict).
 
 ## Directory Structure
 
@@ -115,7 +115,7 @@ For each assistant in `prompts/squad/lenient/assistants/`:
 
 **Greeter Classifier (entry point):**
 ```
-firstMessage: "Bey and Associates, this is {{agent_name}}. How can I help you?"
+firstMessage: "McCraw Law Group, this is {{agent_name}}. How can I help you?"
 firstMessageMode: "assistant-speaks-first"
 ```
 
@@ -144,7 +144,7 @@ See `handoff_tools/agent_tools.json` for tool definitions and assignments.
 ### Step 5: Configure Variables
 
 Pass these variables to the squad:
-- `firm_name`: "Bey and Associates"
+- `firm_name`: "McCraw Law Group"
 - `firm_id`: 1
 - `agent_name`: "Emma"
 - `is_open`: boolean (office hours status)
@@ -312,7 +312,11 @@ Analyzes new client firm SOPs against current agent capabilities to produce a st
 - [ ] Existing client → staff role mapping: paralegal displayed as "case manager", lawyer as "attorney"
 - [ ] Pre-ID caller → phone request deflected to transfer offer (never shares staff phone)
 - [ ] Pre-ID caller → staff role mapping: generalized from hardcoded "case manager" using display_role
+- [ ] Insurance adjuster → count > 1: no confirmation of client existence ("I'll need to verify a couple of details")
+- [ ] Insurance adjuster → count = 0: softened language ("I'm not pulling anything up")
 - [ ] Legal system → DOB verification before case lookup
+- [ ] Legal system → count > 1: skips DOB (already collected), asks for incident date only
+- [ ] Legal system → count = 0: softened language ("I'm not pulling anything up")
 - [ ] Legal system → restricted data: only status, email, transfer (deflects phone/dates/payment)
 - [ ] Legal system → staff role mapping: paralegal/legal_assistant displayed as "case manager"
 - [ ] Direct staff request → caller asks for phone number → deflected to transfer offer

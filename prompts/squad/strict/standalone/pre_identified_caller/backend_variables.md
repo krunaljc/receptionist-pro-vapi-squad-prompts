@@ -8,7 +8,7 @@ This document specifies the variables that the backend webhook must pass when ro
 
 | Variable | Type | Required | Description |
 |----------|------|----------|-------------|
-| `firm_name` | string | Yes | The law firm name (e.g., "Bey and Associates") |
+| `firm_name` | string | Yes | The law firm name (e.g., "McCraw Law Group") |
 | `firm_id` | number | Yes | Firm identifier used for API calls |
 | `agent_name` | string | Yes | AI receptionist name (e.g., "Emma", "Sarah") |
 | `is_open` | boolean | Yes | Whether the office is currently open for business |
@@ -38,7 +38,7 @@ This document specifies the variables that the backend webhook must pass when ro
 
 ```json
 {
-  "firm_name": "Bey and Associates",
+  "firm_name": "McCraw Law Group",
   "firm_id": 1,
   "agent_name": "Emma",
   "is_open": true,
@@ -52,8 +52,8 @@ This document specifies the variables that the backend webhook must pass when ro
     "case_type": "Auto Accident",
     "incident_date": "2024-09-15",
     "case_phase_updated_at": "2024-12-20",
-    "case_manager_phone": "404-555-1234",
-    "case_manager_email": "paige.thompson@beyandassociates.com"
+    "case_manager_phone": "972-555-1234",
+    "case_manager_email": "paige.thompson@mccrawlawgroup.com"
   }
 }
 ```

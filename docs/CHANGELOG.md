@@ -4,6 +4,177 @@ All notable changes to the VAPI Squad Prompts are documented in this file.
 
 ---
 
+## [2026-02-07] - Replace Bey & Associates Artifacts with McCraw Law Group Data (Strict Squad)
+
+### Firm-Specific Data Cleanup for McCraw Law Group
+
+**Files Changed:**
+- `prompts/squad/strict/assistants/01_greeter_classifier.md`
+- `prompts/squad/strict/assistants/03_existing_client.md`
+- `prompts/squad/strict/assistants/04_insurance_adjuster.md`
+- `prompts/squad/strict/assistants/05_medical_provider.md`
+- `prompts/squad/strict/assistants/06_new_client.md`
+- `prompts/squad/strict/assistants/07_vendor.md`
+- `prompts/squad/strict/assistants/08_direct_staff_request.md`
+- `prompts/squad/strict/assistants/09_family_member.md`
+- `prompts/squad/strict/assistants/10_spanish_speaker.md`
+- `prompts/squad/strict/assistants/11_referral_source.md`
+- `prompts/squad/strict/assistants/12_legal_system.md`
+- `prompts/squad/strict/assistants/13_sales_solicitation.md`
+- `prompts/squad/strict/handoff_tools/agent_tools.json`
+- `prompts/squad/strict/standalone/pre_identified_caller/system_prompt.md`
+- `prompts/squad/strict/standalone/pre_identified_caller/backend_variables.md`
+- `README.md`
+
+**Problem:** The strict squad was scaffolded from the lenient squad (Bey & Associates, Atlanta, GA) and still contained Bey-specific artifacts: firm name in firstMessage and tool names, Atlanta/Georgia location references, Atlanta zipcode (30327) in voice formatting examples, and Atlanta area code (404) in example data.
+
+**Root Cause:** Initial scaffolding copied all lenient files wholesale. McCraw-specific data (fax, email domain) was updated during onboarding, but firm name, location, and example data references were not cleaned up.
+
+**Solution (23 edits across 16 files + README):**
+
+1. **Firm name references** (7 edits): "Bey and Associates" → "McCraw Law Group" in firstMessage, staff directory knowledge base name/description, standalone backend variables, and example email domain
+2. **Location references** (4 edits): "Atlanta, Georgia" → "North Texas area", "Atlanta mainly" → "McKinney mainly, with offices across Texas"
+3. **Zipcode examples** (12 edits): `<spell>30327</spell>` → `<spell>75070</spell>` in Voice Formatting sections across all 12 applicable agents
+4. **Area code example** (1 edit): "404-555-1234" → "972-555-1234" in backend variables
+5. **README** (3 edits): Updated description to reflect multi-firm system, updated strict squad examples
+
+**What Stays Unchanged:**
+- Fax `972-332-2361` — already correct
+- Email `intake@mccrawlawgroup.com` — already correct
+- Email voice format "McCraw Law Group dot com" — already correct
+- Template variables (`{{firm_name}}`, `{{profile.locations}}`, etc.)
+- All agent logic, routing, guardrails, tool call rules
+- Lenient squad — completely untouched
+
+**Operational Note:** If the VAPI dashboard knowledge base is still named `Bey_and_associates_staff_directory`, it must be renamed to `McCraw_law_group_staff_directory` to match the prompt-side references.
+
+---
+
+## [2026-02-06] - Fix: Fax Delivery Pacing & SSML Enforcement (Agent #5)
+
+### Two-Part Fax Delivery + Hardened SSML Constraints
+
+**Files Changed:**
+- `prompts/squad/strict/assistants/05_medical_provider.md`
+
+**Problem:** Two issues observed in a real call with the Medical Provider agent:
+1. Fax number buried in an info dump — policy, fax number, and follow-up all delivered in one breath. Caller isn't ready to write down the number.
+2. When caller asks to repeat the fax number, model outputs plain text ("nine seven two three three two two three six one") instead of SSML-formatted digits. No pauses between digit groups.
+
+**Root Causes:**
+1. Step 1 scripted response was a single paragraph bundling three pieces of information. No structural reason for the model to pause between setup and number delivery.
+2. Voice Formatting section was a passive reference at the bottom of the prompt — not framed as a hard behavioral constraint. Model treated SSML as "nice to have" and shortcut on subsequent mentions.
+
+**Solution:**
+
+1. **Restructured Step 1 into two-part delivery:**
+   - Part A: State fax policy + ask "Are you ready?" → STOP and wait for confirmation
+   - Part B: Deliver fax number in isolation → STOP and wait for acknowledgment
+   - Follow-up reassurance moves to after caller confirms they have the number
+   - Added skip-ahead handler for callers who ask for the number directly
+
+2. **Added SSML enforcement rule to Response Guidelines:**
+   - "Phone/fax numbers MUST always use SSML tags — including on repeats"
+   - Placed in Response Guidelines (behavioral rules) not just Voice Formatting (reference)
+
+3. **Hardened repeat-fax handler:**
+   - Added inline ⚠️ SSML warning at the decision point
+   - Changed "Sure, it's" → "Sure. It's" (period creates micro-pause before digits)
+
+4. **Applied "The number is" signal pattern across all fax mentions:**
+   - Leave-a-message: "through fax. The number is..." (was: "fax line at...")
+   - Transfer-fail: "through fax. The number is..." (was: "fax line at...")
+   - Separates the word "fax" from the actual digits with a natural signal
+
+**What stays unchanged:**
+- Third-party policy, blocked entities list, security boundaries
+- Fax-only policy for medical providers (no transfers, no message taking)
+- Tool call rules, silence rules, misclassification handling
+- Voice Formatting reference section (unchanged, now reinforced by Response Guidelines rule)
+- Background Data fax number format
+
+---
+
+## [2026-02-06] - Fix: Third-Party Client Confirmation Leak (Agents 04 & 12)
+
+### Block Implicit Client Confirmation + Fix DOB Redundancy Bug
+
+**Files Changed:**
+- `prompts/squad/strict/assistants/04_insurance_adjuster.md`
+- `prompts/squad/strict/assistants/12_legal_system.md`
+
+**Problem:** When `search_case_details` returns `count > 1`, Agent 04 said "I see several files for Jordan Smith. Could you provide their date of birth?" — this implicitly confirms the person is a client of the firm. Firm policy: never confirm or deny whether someone is a client to unverified third-party callers. Secondary bug: Agent 12 collects DOB at Step 3 before searching, but the `count > 1` block asks for DOB again — redundant and nonsensical.
+
+**Root Causes:**
+1. `count > 1` dialogue ("I see a few files for that name") directly reveals search results to caller
+2. No guardrail section preventing client relationship confirmation to third parties
+3. Agent 12 `count > 1` block duplicated DOB collection already performed at Step 3
+
+**Solution:**
+
+1. **Added `[Client Relationship Confidentiality]` section** to both agents (after Security Boundaries):
+   - Never confirm or deny whether someone is a client
+   - Verification requests must sound like routine procedure, not a reaction to search results
+   - Response language must not vary based on count
+
+2. **Rewrote `count > 1` block in Agent 04:**
+   - Before: "I see a few files for that name. What's the date of birth?"
+   - After: "I'll need to verify a couple of details. What's the client's date of birth?"
+   - Added explicit step-by-step disambiguation: DOB → incident date → customer success/message
+
+3. **Rewrote `count > 1` block in Agent 12 (fixed DOB redundancy bug):**
+   - Before: Asked for DOB again (already collected at Step 3)
+   - After: Skips straight to incident date: "I'll need one more detail to pull up the right file. What was the date of the incident?"
+   - Falls through to customer success/message if still ambiguous
+
+4. **Softened `count = 0` language** in both agents:
+   - Before: "I'm not finding that name" / "I'm not finding that name in our system"
+   - After: "I'm not pulling anything up with that name" (doesn't explicitly deny client exists)
+
+**What stays unchanged:**
+- Agent 03 (Existing Client) — caller IS the client, so "a few files for your name" is acceptable
+- `count = 1` flows — by the time a single match is found, caller has provided enough identifying info
+- Lenient squad agents — out of scope
+- Spelling protocol, tool call rules, transfer flows, message taking, error handling, voice formatting
+
+---
+
+## [2026-02-06] - Fix: Agent Spelling Out Names From Transcription (Agents 03 & 04)
+
+### Block Letter-by-Letter Name Spelling + Add "Caller Doesn't Spell" Branch
+
+**Files Changed:**
+- `prompts/squad/strict/assistants/04_insurance_adjuster.md`
+- `prompts/squad/strict/assistants/03_existing_client.md`
+
+**Problem:** When `search_case_details` returns `count = 0`, the agent asks "Could you spell that for me please?" If the caller repeats the name without spelling it, the agent improvises by spelling the name back letter-by-letter to "confirm" — and misspells it (e.g., "f r e d d i e i e e" for "Freddie") because LLMs cannot reliably decompose words into individual characters.
+
+**Root Causes:**
+1. No explicit branch for "caller repeats name without spelling after being asked to spell"
+2. No guardrail prohibiting the agent from spelling names aloud
+3. LLMs hallucinate extra/wrong letters when attempting character-level decomposition
+
+**Solution:**
+
+1. **Added "never spell names" guardrail** to `[Response Guidelines]` in both agents:
+   - "NEVER spell out a name letter-by-letter to the caller — you will get it wrong. If you need to confirm a name, say the name naturally (e.g., 'Freddie Flintstone?'), never as individual letters."
+
+2. **Added "caller doesn't spell" branch** to the `count = 0` flow in both agents:
+   - If caller repeats the name without spelling → treat as confirmation the name is correct
+   - Re-search with the SAME name (transcription may have been correct all along)
+   - If still count = 0 → proceed to escalation path (customer success transfer or message taking)
+   - Do NOT ask them to spell again — they've already declined implicitly
+
+**What stays unchanged:**
+- Spelling protocol (detecting, handling, and using spelled names) — no change
+- count = 1, count > 1 flows — no change
+- Tool call rules, silence rules — no change
+- Transfer and message-taking flows — no change
+- Error handling — no change
+- Voice formatting — no change
+
+---
+
 ## [2026-02-06] - Direct Staff Request: Add Phone Restriction Guardrails (Agent 08)
 
 ### Direct Staff Request: Block Phone Sharing from Directory Results

@@ -224,7 +224,7 @@ If they didn't ask about case types, proceed to Step 2.
 - Then: "Want me to connect you with them?"
 
 **"Where are you located?"**
-- "We're based in Atlanta. We have offices in a few other cities too."
+- "We're based in McKinney, Texas. We have offices in a few other cities across Texas too."
 - Then continue with transfer offer.
 
 **"What's your email?" / "Can I email you documents?"**
@@ -283,7 +283,7 @@ Then proceed immediately to message taking protocol.
 
 [Voice Formatting]
 - Phone: <spell>404</spell><break time="200ms"/><spell>555</spell><break time="200ms"/><spell>1234</spell>
-- Zipcodes: <spell>30327</spell>
+- Zipcodes: <spell>75070</spell>
 ```
 
 ---

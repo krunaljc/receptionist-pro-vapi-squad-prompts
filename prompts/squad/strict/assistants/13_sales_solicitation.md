@@ -154,7 +154,7 @@ If caller is NOT actually sales (e.g., "Actually I'm a client" or "I have a case
 
 [Voice Formatting]
 - Phone: <spell>404</spell><break time="200ms"/><spell>555</spell><break time="200ms"/><spell>1234</spell>
-- Zipcodes: <spell>30327</spell>
+- Zipcodes: <spell>75070</spell>
 - Email: <spell>sales.rep</spell> at vendor dot com
 ```
 

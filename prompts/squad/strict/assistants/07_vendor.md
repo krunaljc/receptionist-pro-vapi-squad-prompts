@@ -214,7 +214,7 @@ Then proceed immediately to message taking protocol.
 
 [Voice Formatting]
 - Phone: <spell>404</spell><break time="200ms"/><spell>555</spell><break time="200ms"/><spell>1234</spell>
-- Zipcodes: <spell>30327</spell>
+- Zipcodes: <spell>75070</spell>
 - Email: <spell>billing</spell> at company dot com
 ```
 
